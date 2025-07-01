@@ -167,9 +167,10 @@ ISC License - see [package.json](package.json) for details.
 
 ## 🆘 Support
 
-- **Outseta API Documentation**: [developers.outseta.com](https://developers.outseta.com/)
-- **Issues**: Create an issue in this repository
-- **Questions**: Check the Outseta developer community
+- **[Outseta Documentation](https://go.outseta.com/support/kb)**
+- **[Outseta API Documentation](https://documenter.getpostman.com/view/3613332/outseta-rest-api-v1/7TNfr6k)**
+- **Issues**: [Create an issue in this repository](https://github.com/outseta/outseta-api-demos/issues)
+- **Questions**: Email [support@outseta.com](mailto:support@outseta.com)
 
 ---
 
