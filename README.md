@@ -1,71 +1,79 @@
 # Outseta API Demos
 
-A collection of practical examples and scripts demonstrating how to interact with the Outseta API. This repository is designed to help newcomers to Outseta learn how to use the API properly through real-world examples.
+A collection of practical examples and scripts demonstrating how to interact with the Outseta REST API. This repository is designed to help developers learn how to use the API effectively through real-world examples and best practices.
+
+👉 **[Explore demos](#-available-demos)**
 
 ## 🎯 Purpose
 
 These demos showcase common Outseta API operations and patterns, making it easier for developers to:
 
-- Understand Outseta's API structure and capabilities
-- Implement common business logic with Outseta
-- Learn best practices for API integration
-- Build reliable automation workflows
+- **Understand** Outseta's API structure and capabilities
+- **Implement** common business logic with Outseta
+- **Learn** best practices for API integration
+- **Build** reliable automation workflows
 
 ## 📋 Prerequisites
 
-- Node.js 18.0.0 or higher
-- Outseta API credentials (API Key and Secret)
-- Basic understanding of JavaScript/Node.js
+Before you begin, ensure you have:
+
+- **Node.js** 18.0.0 or higher
+- **Outseta API credentials** (API Key and Secret)
+- **Basic understanding** of JavaScript/Node.js
+- **Git** for cloning the repository
 
 ## 🚀 Quick Start
 
-1. **Clone the repository**
+### 1. Clone the Repository
 
-   ```bash
-   git clone <your-repo-url>
-   cd outseta-api-demos
-   ```
+```bash
+git clone <your-repo-url>
+cd outseta-scripts
+```
 
-2. **Install dependencies**
+### 2. Install Dependencies
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-3. **Set up environment variables**
-   Create a `.env` file in the root directory:
+### 3. Configure Environment Variables
 
-   ```env
-   OUTSETA_API_KEY=your_api_key_here
-   OUTSETA_API_SECRET=your_api_secret_here
-   OUTSETA_SUBDOMAIN=your_subdomain_here
-   ```
+Create a `.env` file in the root directory:
 
-4. **Run a demo**
-   ```bash
-   node track-usage.js <account-uid> <add-on-uid> <amount>
-   ```
+```bash
+cp .env.example .env
+```
+
+Edit the `.env` file with your Outseta credentials:
+
+```env
+OUTSETA_API_KEY=your_api_key_here
+OUTSETA_API_SECRET=your_api_secret_here
+OUTSETA_SUBDOMAIN=your_subdomain_here
+```
+
+### 4. Run a Demo
+
+Each demo has specific usage instructions. See the [Available Demos](#-available-demos) section below.
+
+**Example:**
+
+```bash
+node track-usage.js L9nqkRXQ j9bpnkmn 3
+```
 
 ## 📚 Available Demos
 
-### Track Usage (`track-usage.js`)
+### Track Usage ([Guide](track-usage.md) | [Source Code](track-usage.js))
 
-**Purpose**: Demonstrates how to update usage-based pricing for add-on subscriptions.
+**Purpose**: Update usage-based pricing for add-on subscriptions
 
-**What it does**:
-
-- Fetches account data with subscription and add-on information
-- Validates that the specified add-on exists and is usage-based
-- Creates a new usage record with the specified amount
-- Provides detailed logging and error handling
-
-**Use cases**:
+**Use Cases**:
 
 - Tracking API calls, storage usage, or other metered services
 - Implementing usage-based billing for custom add-ons
 - Automating usage reporting from external systems
-
-**📖 Learn More**: For a comprehensive overview of usage-based pricing concepts, see [Outseta's Usage-based (metered) pricing guide](https://go.outseta.com/support/kb/articles/dpWr3mnq/usage-based-metered-pricing).
 
 **Usage**:
 
@@ -75,103 +83,165 @@ node track-usage.js <account-uid> <add-on-uid> <amount>
 
 **Example**:
 
+Add _3_ units of usage to the add-on with UID _j9bpnkmn_ for the account with UID _L9nqkRXQ_.
+
 ```bash
-node track-usage.js abc123 def456 10
+node track-usage.js L9nqkRXQ j9bpnkmn 3
 ```
 
-**API Endpoints Used**:
+---
 
-- `GET /api/v1/crm/accounts/{uid}` - Fetch account with subscription details
-- `POST /api/v1/billing/usage` - Create usage record
+_More demos coming soon!_
 
 ## 🔧 Configuration
 
 ### Environment Variables
 
-All scripts use the following environment variables:
+All scripts require the following environment variables:
 
-| Variable             | Description             | Required |
-| -------------------- | ----------------------- | -------- |
-| `OUTSETA_API_KEY`    | Your Outseta API key    | Yes      |
-| `OUTSETA_API_SECRET` | Your Outseta API secret | Yes      |
-| `OUTSETA_SUBDOMAIN`  | Your Outseta subdomain  | Yes      |
+| Variable             | Description             | Required | Example        |
+| -------------------- | ----------------------- | -------- | -------------- |
+| `OUTSETA_API_KEY`    | Your Outseta API key    | ✅ Yes   | `abc123def456` |
+| `OUTSETA_API_SECRET` | Your Outseta API secret | ✅ Yes   | `xyz789uvw012` |
+| `OUTSETA_SUBDOMAIN`  | Your Outseta subdomain  | ✅ Yes   | `mycompany`    |
+
+### Getting Your Credentials
+
+1. Log into your Outseta account
+   Navigate to **Settings → Integrations → API Keys**
+2. Locate the **Add API Key** button to generate a new API Key and Secret
+3. Add the API Key and Secret to your `.env` file
 
 ## 🛠️ Development
 
 ### Project Structure
 
 ```
-outseta-api-demos/
-├── README.md
-├── package.json
-├── track-usage.js
-├── .env.example (example .env file)
-└── .env (create this file)
-
+outseta-scripts/
+├── README.md              # This file
+├── package.json           # Project dependencies
+├── <demo-name>.js         # Demo script
+├── <demo-name>.md         # Demo documentation
+├── .env.example           # Environment variables template
+└── .env                   # Your environment variables (create this)
 ```
 
 ### Adding New Demos
 
-When adding new demo scripts:
+When adding new demo scripts, follow this structure:
 
-1. Follow the existing naming convention (`kebab-case.js`)
-2. Include comprehensive JSDoc comments
-3. Add proper error handling and logging
-4. Update this README with documentation
-5. Include usage examples and API endpoints used
+1. Create the demo script (`<demo-name>.js`)
 
-### Code Style
+   - Follow the structure of existing demos
+   - Include comprehensive error handling
+   - Add detailed console logging
+   - Export functions for programmatic use
 
-- Use async/await for API calls
-- Include detailed console logging for debugging
-- Provide clear error messages
-- Export functions for programmatic use
-- Include CLI interface when appropriate
+2. Create documentation (`<demo-name>.md`)
+
+   - Explain the purpose and use cases
+   - Provide clear usage instructions
+   - Include code examples
+   - Document API endpoints used
+
+3. Update this README
+   - Add the demo to the [Available Demos](#-available-demos) section
+   - Follow the established format
+
+### Code Style Guidelines
+
+- ✅ Use **async/await** for API calls
+- ✅ Include **detailed console logging** for debugging
+- ✅ Provide **clear error messages** with context
+- ✅ Export **functions** for programmatic use
+- ✅ Include **CLI interface** when appropriate
+- ✅ Add **JSDoc comments** for functions
+- ✅ Use **consistent error handling** patterns
 
 ## 🔍 API Reference
 
-For detailed API documentation, visit:
+### Official Documentation
 
-- [Outseta API Documentation](https://developers.outseta.com/)
+- **[Outseta API Documentation](https://developers.outseta.com/)**
+- **[Outseta Support Knowledge Base](https://go.outseta.com/support/kb)**
 
 ### Common API Patterns
 
-**Authentication**:
+#### Headers
 
 ```javascript
-headers: {
+const headers = {
   Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
   "Content-Type": "application/json",
-}
+};
 ```
 
-**Error Handling**:
+#### Error Handling
 
 ```javascript
 if (!response.ok) {
-  throw new Error(`API request failed: ${response.status}`);
+  const data = await response.json();
+  throw new Error(
+    `API request failed: ${response.status} - ${data.ErrorMessage}`
+  );
+}
+```
+
+#### Response Validation
+
+```javascript
+const data = await response.json();
+if (!data || !data.Uid) {
+  throw new Error("Invalid response format from API");
 }
 ```
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Add your demo script
-4. Update the README
-5. Submit a pull request
+We welcome contributions! Here's how to get started:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-demo`)
+3. **Add** your demo script following the guidelines above
+4. **Update** the README with your new demo
+5. **Test** your changes thoroughly
+6. **Submit** a pull request
+
+### Contribution Guidelines
+
+- Follow the existing code style and structure
+- Include comprehensive documentation
+- Add appropriate error handling
+- Test with real Outseta credentials
+- Update the README with your new demo
 
 ## 📄 License
 
-ISC License - see [package.json](package.json) for details.
+This project is licensed under the ISC License - see [package.json](package.json) for details.
 
-## 🆘 Support
+## 🆘 Support & Resources
 
-- **[Outseta Documentation](https://go.outseta.com/support/kb)**
-- **[Outseta API Documentation](https://documenter.getpostman.com/view/3613332/outseta-rest-api-v1/7TNfr6k)**
-- **Issues**: [Create an issue in this repository](https://github.com/outseta/outseta-api-demos/issues)
-- **Questions**: Email [support@outseta.com](mailto:support@outseta.com)
+### Getting Help
+
+- **[Outseta Documentation](https://go.outseta.com/support/kb)** - Official Outseta help
+- **[Outseta API Documentation](https://documenter.getpostman.com/view/3613332/outseta-rest-api-v1/7TNfr6k)** - Complete API reference
+- **[GitHub Issues](https://github.com/outseta/outseta-api-demos/issues)** - Report bugs or request features
+- **[Email Support](mailto:support@outseta.com)** - Direct support from Outseta
+
+### Additional Resources
+
+- **[Usage-based Pricing Guide](https://go.outseta.com/support/kb/articles/dpWr3mnq/usage-based-metered-pricing)** - Learn about metered billing
+- **[Outseta Developer Community](https://developers.outseta.com/)** - Connect with other developers
 
 ---
 
-**Note**: These demos are for educational purposes. Always test thoroughly in a development environment before using in production.
+## ⚠️ Important Notes
+
+- **Educational Purpose**: These demos are for educational purposes
+- **Test First**: Always test thoroughly in a development environment before using in production
+- **API Limits**: Be mindful of Outseta's API rate limits
+- **Security**: Never commit your `.env` file or expose API credentials
+
+---
+
+**Ready to get started?** Check out the [Track Usage demo](#-track-usage) for a practical example!
