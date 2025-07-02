@@ -2,6 +2,7 @@
   "name": "outseta-api-demos",
   "version": "1.0.0",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +13,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "dotenv": "^17.0.0"
+    "dotenv": "^17.0.0",
+    "inquirer": "^12.7.0"
   }
 }

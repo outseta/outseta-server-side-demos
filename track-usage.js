@@ -1,6 +1,5 @@
-#!/usr/bin/env node
-
-require("dotenv").config();
+import "dotenv/config";
+import inquirer from "inquirer";
 
 /**
  * Updates usage for a specific add-on subscription in Outseta
@@ -9,7 +8,7 @@ require("dotenv").config();
  * @param {number} amount - The usage amount to add
  * @returns {Promise<Object>} - The API response
  */
-async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
+export async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
   try {
     // Step 1: Fetch the account with subscription add-on info
     const accountResponse = await fetch(
@@ -24,11 +23,13 @@ async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
     );
 
     if (!accountResponse.ok) {
-      throw new Error(`Failed to fetch account: ${accountResponse.status}`);
+      throw new Error(
+        `/api/v1/crm/accounts/: [${accountResponse.status}] ${accountResponse.ErrorMessage || accountResponse.Message || ""}`
+      );
     }
 
     const accountData = await accountResponse.json();
-    console.log("✅ Account data fetched for:", accountUid);
+    console.info(`✅ Account data fetched for: ${accountUid}`);
 
     // Step 2: Find the correct add-on subscription
     const addOnSubscriptions =
@@ -53,7 +54,9 @@ async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
       );
     }
 
-    console.log("✅ Found add-on subscription:", targetAddOnSubscription.Uid);
+    console.info(
+      `✅ Found add-on subscription: ${targetAddOnSubscription.Uid}`
+    );
 
     // Step 3: Update usage for the add-on subscription
     const usageUpdatePayload = {
@@ -76,67 +79,72 @@ async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
       }
     );
 
+    const data = await usageResponse.json();
+    console.info("\n--- api/v1/billing/usage response ---");
+    console.info(JSON.stringify(data, null, 2));
+    console.info("------------------------------\n");
+
     if (!usageResponse.ok) {
-      throw new Error(`Failed to update usage: ${usageResponse.status}`);
+      throw new Error(
+        `/api/v1/billing/usage: [${usageResponse.status}] ${usageResponse.ErrorMessage || usageResponse.Message || ""}`
+      );
     }
 
-    const usageData = await usageResponse.json();
-    console.log("✅ Usage updated successfully:", usageData.Uid);
-    return usageData;
+    return data;
   } catch (error) {
-    console.error("❌ Error updating usage-based pricing:", error.message);
-    throw error;
+    throw new Error(error.message);
   }
 }
 
 // CLI execution
 async function main() {
-  // Get command line arguments
-  const args = process.argv.slice(2);
+  const questions = [
+    {
+      type: "input",
+      name: "accountUid",
+      message: "Enter the Account UID:",
+      validate: (input) => input.trim() !== "" || "Account UID is required",
+    },
+    {
+      type: "input",
+      name: "addOnUid",
+      message: "Enter the Add-on UID:",
+      validate: (input) => input.trim() !== "" || "Add-on UID is required",
+    },
+    {
+      type: "input",
+      name: "amount",
+      message: "Enter the usage amount:",
+      validate: (input) => {
+        const value = parseInt(input, 10);
+        if (isNaN(value) || value <= 0) {
+          return "Amount must be a positive number";
+        }
+        return true;
+      },
+      filter: (input) => parseInt(input, 10),
+    },
+  ];
 
-  if (args.length !== 3) {
-    console.log(
-      "Usage: node track-usage.js <account-uid> <add-on-uid> <amount>"
-    );
-    console.log("Example: node track-usage.js abc123 def456 10");
-    process.exit(1);
-  }
+  const { accountUid, addOnUid, amount } = await inquirer.prompt(questions);
 
-  const [accountUid, addOnUid, amount] = args;
-  const usageAmount = parseInt(amount, 10);
-
-  if (isNaN(usageAmount) || usageAmount <= 0) {
-    console.error("❌ Amount must be a positive number");
-    process.exit(1);
-  }
-
-  console.log("🚀 Starting usage update...");
-  console.log(`   Account UID: ${accountUid}`);
-  console.log(`   Add-on UID: ${addOnUid}`);
-  console.log(`   Amount: ${usageAmount}`);
-  console.log("");
+  console.log("\n🚀 Track usage...\n");
 
   try {
-    const result = await updateUsageBasedPricing(
-      accountUid,
-      addOnUid,
-      usageAmount
-    );
+    const result = await updateUsageBasedPricing(accountUid, addOnUid, amount);
+    console.log("\n🎉 Success! Usage record created\n");
+    console.log(`   Usage UID: ${result.Uid}`);
+    console.log(`   Usage Date: ${result.UsageDate}`);
+    console.log(`   Amount: ${result.Amount}`);
+    console.log(`   Created: ${result.Created}`);
+    console.log(`   Updated: ${result.Updated}`);
     console.log("");
-    console.log("🎉 Success! Usage record created");
-    console.log(`   Usage ID: ${result.Uid}`);
-    console.log(`   Quantity: ${result.Quantity}`);
-    console.log(`   Created: ${result.CreatedDateTime}`);
   } catch (error) {
-    console.log("");
-    console.error("💥 Failed to update usage");
+    console.error(`\n💥 Failed to track usage: ${error.message}\n`);
     process.exit(1);
   }
 }
 
-// Run if called directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
-
-module.exports = { updateUsageBasedPricing };
