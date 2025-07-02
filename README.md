@@ -67,25 +67,14 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 
 ## 📚 Available Demos
 
-### Track Usage ([Guide](track-usage.md) | [Source Code](track-usage.js))
-
-**Purpose**: Update usage-based pricing for add-on subscriptions
-
-**Use Cases**:
-
-- Tracking API calls, storage usage, or other metered services
-- Implementing usage-based billing for custom add-ons
-- Automating usage reporting from external systems
-
-**Usage**:
-
-```bash
-node track-usage.js
-```
+| Demo               | Guide                     | Source                     | Usage                   |
+| ------------------ | ------------------------- | -------------------------- | ----------------------- |
+| Register User      | [Guide](auth-register.md) | [Source](auth-register.js) | `node auth-register.js` |
+| Generate JWT Token | [Guide](auth-token.md)    | [Source](auth-token.js)    | `node auth-token.js`    |
+| Create Plan        | [Guide](plans-create.md)  | [Source](plans-create.js)  | `node plans-create.js`  |
+| Track Usage        | [Guide](track-usage.md)   | [Source](track-usage.js)   | `node track-usage.js`   |
 
 ---
-
-_More demos coming soon!_
 
 ## 🔧 Configuration
 

@@ -132,7 +132,8 @@ async function main() {
     console.log("\n🚀 Track usage...\n");
 
     const result = await updateUsageBasedPricing(accountUid, addOnUid, amount);
-    console.log("\n🎉 Success! Usage record created\n");
+    console.log("\n🎉 Success! Usage record created");
+    console.log("");
     console.log(`   Usage UID: ${result.Uid}`);
     console.log(`   Usage Date: ${result.UsageDate}`);
     console.log(`   Amount: ${result.Amount}`);
@@ -145,7 +146,7 @@ async function main() {
       console.log("Exited.");
       process.exit(0);
     }
-    console.error(`\n💥 Failed to track usage: ${error.message}\n`);
+    console.error(`\n💥 Failed to track usage: ${error.message || error}\n`);
     process.exit(1);
   }
 }
