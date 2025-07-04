@@ -24,7 +24,7 @@ Demonstrates how to generate a JWT access token for a user with the Outseta API 
 ## 📋 Prerequisites
 
 - The [global prerequisites](README.md#prerequisites)
-- The user must already exist in Outseta (for example, via the [auth-register](auth-register/auth-register.md) demo)
+- The user must already exist in Outseta (for example, via the [register-account](register-account/register-account.md) demo)
 
 ## 🚀 Run the demo
 
@@ -32,7 +32,7 @@ Demonstrates how to generate a JWT access token for a user with the Outseta API 
 2. Run the demo script using this format:
 
 ```bash
-npm run auth-token
+npm run generate-jwt
 ```
 
 When you run the script, you will be prompted to enter:
@@ -42,7 +42,7 @@ When you run the script, you will be prompted to enter:
 **Example session**:
 
 ```bash
-$ npm run auth-token
+$ npm run generate-jwt
 🔑 Login
   Email: jane@example.com
 

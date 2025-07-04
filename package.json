@@ -1,13 +1,13 @@
 {
-  "name": "outseta-admin-api-demos",
+  "name": "outseta-server-side-demos",
   "version": "1.0.0",
   "type": "module",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "auth-register": "node auth-register/auth-register.cli.js",
-    "auth-token": "node auth-token/auth-token.cli.js",
-    "plans-create": "node plans-create/plans-create.cli.js",
+    "register-account": "node register-account/register-account.cli.js",
+    "generate-jwt": "node generate-jwt/generate-jwt.cli.js",
+    "create-plan": "node create-plan/create-plan.cli.js",
     "track-usage": "node track-usage/track-usage.cli.js"
   },
   "author": "",

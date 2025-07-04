@@ -1,23 +1,26 @@
-# Register User Demo
+# Register Account (User) Demo
 
 ## Purpose
 
-Demonstrates how to register a new user (Person + Account) with the Outseta API, including custom fields and plan selection. This script does not handle login.
+Demonstrates how to register a new Account with a Person attached (aka. registering a new user) with the Outseta API, including custom fields and plan selection.
 
 ## What it does
 
-- Registers a new user (creates both a Person and an Account)
-- Prompts the user to select a subscription plan
-- Adds a custom field `Maskot` to the Account and `CoffeePreference` to the Person
-- Instructs the user to check their email to set their password
-- Provides detailed logging and error handling
+- Prompts for a subscription plan
+- Prompts for person details (email, first name, last name, coffee preference)
+- Prompts for account details (name, maskot)
+- Creates a new Account and Person in Outseta
+- Subscribed the Account to the selected plan
+- Logs the created Account and Person or any errors
 
 ## Outseta: Account vs. Person
 
 - **Account**: Represents a company, organization, or team. Each Account can have one or more associated people (users). In this demo, the Account is created with a `Name` (company name) and a custom field `Maskot`.
-- **Person**: Represents an individual user. Each Person is associated with an Account. In this demo, the Person is created with their name, email, and a custom field `CoffeePreference`.
+- **Person**: Represents an individual user. Each Person is associated with zero, one or multiple Accounts. In this demo, the Person is created with their name, email, and a custom field `CoffeePreference`.
 
 This separation allows Outseta to support both B2B (multiple users per company) and B2C (one user per account) use cases.
+
+It also allows for people who have not yet subscribed to a plan, but has registered interest through a lead form, email list subscription, etc.
 
 ## Use cases
 
@@ -28,7 +31,7 @@ This separation allows Outseta to support both B2B (multiple users per company) 
 ## 📋 Prerequisites
 
 - The [global prerequisites](README.md#prerequisites)
-- A plan must exist in Outseta (for example, via the [plans-create](plans-create/plans-create.md) demo)
+- A plan must exist in Outseta (for example, via the [create-plan](create-plan/create-plan.md) demo)
 
 ## 🚀 Run the demo
 
@@ -36,7 +39,7 @@ This separation allows Outseta to support both B2B (multiple users per company) 
 2. Run the demo script:
 
 ```bash
-npm run auth-register
+npm run register-account
 ```
 
 The script will interactively prompt you for Person details (email, first name, last name, coffee preference), Account details (company name, maskot), and then for a subscription plan. No command-line arguments are needed.
@@ -49,7 +52,7 @@ The script will interactively prompt you for Person details (email, first name, 
 **Example session**:
 
 ```bash
-$ npm run auth-register
+$ npm run register-account
 
 📦 Fetching available plans...
 ? Select a plan: Basic (UID: wQXw3omK)
@@ -258,7 +261,7 @@ $ npm run auth-register
    Company Name: Acme Inc
    Company Maskot: Roadrunner
 
-ℹ️ You may generate a token on their behalf in a server side environment (even before they have set their password) using the [auth-token](auth-token.md) demo.
+ℹ️ You may generate a token on their behalf in a server side environment (even before they have set their password) using the [generate-jwt](generate-jwt.md) demo.
 ```
 
 ## API Endpoint Used

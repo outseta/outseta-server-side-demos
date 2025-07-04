@@ -1,10 +1,10 @@
-# Outseta API Demos
+# Outseta Server-Side Demos
 
-A collection of practical examples and scripts demonstrating how to interact with the Outseta Admin REST API. This repository is designed to help developers learn how to use the API effectively through real-world examples and best practices.
+A collection of practical examples and scripts demonstrating how to interact with the Outseta Admin REST API and other relevant server-side operations.
 
 👉 **[Explore demos](#-available-demos)**
 
-> **⚠️ Important Security Note**: The code in these demos is intended to be used only in secure server-side environments (for example, Zapier, Make, or your own custom server). Do not run this code in client-side (such as websites, web apps or mobile apps) contexts, as it could expose sensitive operations and compromise your security.
+> **⚠️ Important Security Note**: The code in these demos is intended to be used only in secure server-side environments (for example, Zapier, Make, or your own custom server). Do not run this code in client-side contexts (such as websites, web apps or mobile apps) as it could expose sensitive operations and compromise your security.
 
 ## 🎯 Purpose
 
@@ -67,12 +67,12 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 
 ## 📚 Available Demos
 
-| Demo               | Guide                                   | Source                                   | Usage                   |
-| ------------------ | --------------------------------------- | ---------------------------------------- | ----------------------- |
-| Register User      | [Guide](auth-register/auth-register.md) | [Source](auth-register/auth-register.js) | `npm run auth-register` |
-| Generate JWT Token | [Guide](auth-token/auth-token.md)       | [Source](auth-token/auth-token.js)       | `node auth-token.js`    |
-| Create Plan        | [Guide](plans-create/plans-create.md)   | [Source](plans-create/plans-create.js)   | `node plans-create.js`  |
-| Track Usage        | [Guide](track-usage/track-usage.md)     | [Source](track-usage/track-usage.js)     | `npm run track-usage`   |
+| Demo               | Guide                                         | Source                                         | Usage                      |
+| ------------------ | --------------------------------------------- | ---------------------------------------------- | -------------------------- |
+| Register User      | [Guide](register-account/register-account.md) | [Source](register-account/register-account.js) | `npm run register-account` |
+| Generate JWT Token | [Guide](generate-jwt/generate-jwt.md)         | [Source](generate-jwt/generate-jwt.js)         | `npm run generate-jwt`     |
+| Create Plan        | [Guide](create-plan/create-plan.md)           | [Source](create-plan/create-plan.js)           | `npm run create-plan`      |
+| Track Usage        | [Guide](track-usage/track-usage.md)           | [Source](track-usage/track-usage.js)           | `npm run track-usage`      |
 
 ---
 
@@ -101,7 +101,6 @@ All scripts require the following environment variables:
 
 - **[Outseta API Documentation](https://developers.outseta.com/)**
 - **[Outseta Support Knowledge Base](https://go.outseta.com/support/kb)**
-
 
 ## 🤝 Contributing
 

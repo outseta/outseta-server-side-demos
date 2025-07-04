@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { input, select, confirm, number } from "@inquirer/prompts";
-import { createPlan, getPlanFamilies } from "./plans-create.js";
+import { createPlan } from "./create-plan.js";
 
 process.on("SIGINT", () => {
   console.log("\nExited.");

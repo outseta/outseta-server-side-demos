@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { input, select } from "@inquirer/prompts";
-import { registerUser } from "./auth-register.js";
+import { registerUser } from "./register-account.js";
 
 /**
  * Fetches available plans from Outseta

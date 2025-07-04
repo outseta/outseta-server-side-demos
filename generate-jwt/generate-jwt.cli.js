@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { input } from "@inquirer/prompts";
-import { loginUser } from "./auth-token.js";
+import { loginUser } from "./generate-jwt.js";
 
 async function promptForEmail() {
   const email = await input({

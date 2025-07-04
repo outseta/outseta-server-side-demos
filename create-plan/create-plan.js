@@ -48,4 +48,4 @@ async function createPlan({
   return data;
 }
 
-export { createPlan, getPlanFamilies };
+export { createPlan };

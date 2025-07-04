@@ -26,7 +26,7 @@ Demonstrates how to create a new subscription plan in Outseta using the API. Thi
 2. Run the demo script:
 
 ```bash
-npm run plans-create
+npm run create-plan
 ```
 
 The script will interactively prompt you for plan details. No command-line arguments are needed.
@@ -34,7 +34,7 @@ The script will interactively prompt you for plan details. No command-line argum
 **Example session**:
 
 ```bash
-$ npm run plans-create
+$ npm run create-plan
 
 📦 Fetching available plan families...
 ✔ Select a plan family: Default (UID: E9Lw82Qw)
