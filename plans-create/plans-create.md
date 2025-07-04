@@ -85,15 +85,13 @@ $ npm run plans-create
 ```javascript
 const payload = {
   AccountRegistrationMode: 1,
-  IsActive: true,
-  MinimumQuantity: 0,
-  Name: "Test Plan",
-  PlanAddOns: [],
+  IsActive: isActive,
+  Name: name,
   PlanFamily: { Uid: planFamilyUid },
-  MonthlyRate: 9.99,
-  TrialPeriodDays: 0,
-  TrialUntilDate: null,
+  MonthlyRate: monthlyRate,
+  TrialPeriodDays: trialPeriodDays,
 };
+
 const response = await fetch("https://api.outseta.com/v1/billing/plans", {
   method: "POST",
   headers: {
@@ -102,10 +100,4 @@ const response = await fetch("https://api.outseta.com/v1/billing/plans", {
   },
   body: JSON.stringify(payload),
 });
-const data = await response.json();
 ```
-
-## �� Learn More
-
-- [Outseta API Documentation](https://developers.outseta.com/)
-- [Outseta Support Knowledge Base](https://go.outseta.com/support/kb)

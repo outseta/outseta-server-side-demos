@@ -89,12 +89,3 @@ const response = await fetch(
   }
 );
 ```
-
-## 📖 Learn More
-
-- [Outseta API Documentation](https://developers.outseta.com/)
-- [Outseta Support Knowledge Base](https://go.outseta.com/support/kb)
-
----
-
-**Test thoroughly in a development environment before using in production.**

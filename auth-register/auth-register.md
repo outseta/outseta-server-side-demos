@@ -260,3 +260,43 @@ $ npm run auth-register
 
 ℹ️ You may generate a token on their behalf in a server side environment (even before they have set their password) using the [auth-token](auth-token.md) demo.
 ```
+
+## API Endpoint Used
+
+- `POST /api/v1/crm/registrations` – Register a new user
+  - [Register Account API Documentation](https://documenter.getpostman.com/view/3613332/outseta-rest-api-v1/7TNfr6k#6056bd40-c846-4ffe-b545-ae0923511676)
+
+## Core Code Example
+
+```javascript
+const payload = {
+  Name: "Acme Inc",
+  Maskot: "Roadrunner",
+  Subscriptions: [
+    {
+      Plan: { Uid: "wQXw3omK" },
+      BillingRenewalTerm: "2",
+    },
+  ],
+  PersonAccount: [
+    {
+      IsPrimary: true,
+      Person: {
+        Email: "jane@example.com",
+        FirstName: "Jane",
+        LastName: "Doe",
+        CoffeePreference: "Latte",
+      },
+    },
+  ],
+};
+
+const response = await fetch("https://api.outseta.com/v1/crm/ registrations", {
+  method: "POST",
+  headers: {
+    Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(payload),
+});
+```

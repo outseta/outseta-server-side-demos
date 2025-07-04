@@ -70,8 +70,8 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 | Demo               | Guide                                   | Source                                   | Usage                   |
 | ------------------ | --------------------------------------- | ---------------------------------------- | ----------------------- |
 | Register User      | [Guide](auth-register/auth-register.md) | [Source](auth-register/auth-register.js) | `npm run auth-register` |
-| Generate JWT Token | [Guide](auth-token.md)                  | [Source](auth-token.js)                  | `node auth-token.js`    |
-| Create Plan        | [Guide](plans-create.md)                | [Source](plans-create.js)                | `node plans-create.js`  |
+| Generate JWT Token | [Guide](auth-token/auth-token.md)       | [Source](auth-token/auth-token.js)       | `node auth-token.js`    |
+| Create Plan        | [Guide](plans-create/plans-create.md)   | [Source](plans-create/plans-create.js)   | `node plans-create.js`  |
 | Track Usage        | [Guide](track-usage/track-usage.md)     | [Source](track-usage/track-usage.js)     | `npm run track-usage`   |
 
 ---
@@ -202,19 +202,15 @@ We welcome contributions! Here's how to get started:
 
 This project is licensed under the ISC License - see [package.json](package.json) for details.
 
-## 🆘 Support & Resources
-
-### Getting Help
+## 📖 Learn More
 
 - **[Outseta Documentation](https://go.outseta.com/support/kb)** - Official Outseta help
 - **[Outseta API Documentation](https://documenter.getpostman.com/view/3613332/outseta-rest-api-v1/7TNfr6k)** - Complete API reference
+
+## 🆘 Support
+
 - **[GitHub Issues](https://github.com/outseta/outseta-api-demos/issues)** - Report bugs or request features
 - **[Email Support](mailto:support@outseta.com)** - Direct support from Outseta
-
-### Additional Resources
-
-- **[Usage-based Pricing Guide](https://go.outseta.com/support/kb/articles/dpWr3mnq/usage-based-metered-pricing)** - Learn about metered billing
-- **[Outseta Developer Community](https://developers.outseta.com/)** - Connect with other developers
 
 ---
 
@@ -224,7 +220,3 @@ This project is licensed under the ISC License - see [package.json](package.json
 - **Test First**: Always test thoroughly in a development environment before using in production
 - **API Limits**: Be mindful of Outseta's API rate limits
 - **Security**: Never commit your `.env` file or expose API credentials
-
----
-
-**Ready to get started?** Check out the [Track Usage demo](#-track-usage) for a practical example!
