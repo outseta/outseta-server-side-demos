@@ -1,5 +1,5 @@
 import "dotenv/config";
-import inquirer from "inquirer";
+import { input, select } from "@inquirer/prompts";
 import { registerUser, getPlans } from "./auth-register.js";
 
 // CLI execution
@@ -12,74 +12,58 @@ async function main() {
       throw new Error("No plans found.");
     }
     const planChoices = plans.map((plan) => ({
-      name: `${plan.Name} (UID: ${plan.Uid}) - ${plan.Description ? plan.Description.replace(/<[^>]+>/g, "") : ""}`,
+      name: `${plan.Name} (UID: ${plan.Uid}) - ${
+        plan.Description ? plan.Description.replace(/<[^>]+>/g, "") : ""
+      }`,
       value: plan.Uid,
     }));
-    const { selectedPlanUid } = await inquirer.prompt([
-      {
-        type: "list",
-        name: "selectedPlanUid",
-        message: "Select a plan:",
-        choices: planChoices,
-      },
-    ]);
+    const selectedPlanUid = await select({
+      message: "Select a plan:",
+      choices: planChoices,
+    });
     const selectedPlan = plans.find((p) => p.Uid === selectedPlanUid);
     console.log(
       `\n✅ Selected plan: ${selectedPlan.Name} (UID: ${selectedPlan.Uid})\n`
     );
 
-    const personQuestions = [
-      {
-        type: "input",
-        name: "email",
-        message: "  Email:",
-        default: `jane+${Date.now()}@example.com`,
-      },
-      {
-        type: "input",
-        name: "firstName",
-        message: "  First Name:",
-        default: "Jane",
-      },
-      {
-        type: "input",
-        name: "lastName",
-        message: "  Last Name:",
-        default: "Doe",
-      },
-      {
-        type: "input",
-        name: "coffeePreference",
-        message: "  Coffee Preference:",
-        default: "Latte",
-      },
-    ];
-    const accountQuestions = [
-      {
-        type: "input",
-        name: "companyName",
-        message: "  Company Name:",
-        default: "Acme Inc",
-      },
-      {
-        type: "input",
-        name: "companyMaskot",
-        message: "  Company Maskot:",
-        default: "Roadrunner",
-      },
-    ];
-
     // Person and account details
     console.log("👤 Enter Person details:");
-    const personAnswers = await inquirer.prompt(personQuestions);
+    const email = await input({
+      message: "  Email:",
+      default: `jane+${Date.now()}@example.com`,
+    });
+    const firstName = await input({
+      message: "  First Name:",
+      default: "Jane",
+    });
+    const lastName = await input({
+      message: "  Last Name:",
+      default: "Doe",
+    });
+    const coffeePreference = await input({
+      message: "  Coffee Preference:",
+      default: "Latte",
+    });
+
     console.log("\n🏢 Enter Account details:");
-    const accountAnswers = await inquirer.prompt(accountQuestions);
+    const companyName = await input({
+      message: "  Company Name:",
+      default: "Acme Inc",
+    });
+    const companyMaskot = await input({
+      message: "  Company Maskot:",
+      default: "Roadrunner",
+    });
 
     console.log("\n🚀 Registering user...\n");
     const { PrimaryContact, Name, Maskot } = await registerUser({
       planUid: selectedPlanUid,
-      ...personAnswers,
-      ...accountAnswers,
+      email,
+      firstName,
+      lastName,
+      coffeePreference,
+      companyName,
+      companyMaskot,
     });
 
     console.log(

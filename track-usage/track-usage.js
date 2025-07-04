@@ -94,5 +94,3 @@ export async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
     throw new Error(error.message);
   }
 }
-
-export { updateUsageBasedPricing };

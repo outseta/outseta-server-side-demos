@@ -1,5 +1,5 @@
 import "dotenv/config";
-import inquirer from "inquirer";
+import { input, select, confirm } from "@inquirer/prompts";
 import { createPlan, getPlanFamilies } from "./plans-create.js";
 
 process.on("SIGINT", () => {
@@ -20,14 +20,10 @@ async function main() {
       name: `${pf.Name} (UID: ${pf.Uid})${pf.Description ? " - " + pf.Description.replace(/<[^>]+>/g, "") : ""}`,
       value: pf.Uid,
     }));
-    const { selectedPlanFamilyUid } = await inquirer.prompt([
-      {
-        type: "list",
-        name: "selectedPlanFamilyUid",
-        message: "Select a plan family:",
-        choices: planFamilyChoices,
-      },
-    ]);
+    const selectedPlanFamilyUid = await select({
+      message: "Select a plan family:",
+      choices: planFamilyChoices,
+    });
     const selectedPlanFamily = planFamilies.find(
       (pf) => pf.Uid === selectedPlanFamilyUid
     );
@@ -36,51 +32,54 @@ async function main() {
     );
 
     // Prompt for plan details
-    const questions = [
-      {
-        type: "input",
-        name: "name",
-        message: "Plan Name:",
-        default: "Test Plan",
-      },
-      {
-        type: "input",
-        name: "monthlyRate",
+    const name = await input({
+      message: "Plan Name:",
+      default: "Test Plan",
+    });
+
+    let monthlyRate;
+    while (true) {
+      const monthlyRateInput = await input({
         message: "Monthly Rate (USD):",
         default: "9.99",
-        validate: (input) => {
-          const value = parseFloat(input);
-          if (isNaN(value) || value < 0) {
-            return "Please enter a valid positive number";
-          }
-          return true;
-        },
-        filter: (input) => parseFloat(input),
-      },
-      {
-        type: "input",
-        name: "trialPeriodDays",
+      });
+      const value = parseFloat(monthlyRateInput);
+      if (isNaN(value) || value < 0) {
+        console.log("Please enter a valid positive number");
+        continue;
+      }
+      monthlyRate = value;
+      break;
+    }
+
+    let trialPeriodDays;
+    while (true) {
+      const trialPeriodInput = await input({
         message: "Trial Period Days:",
         default: "14",
-        validate: (input) => {
-          const value = parseFloat(input);
-          if (isNaN(value) || value < 0) {
-            return "Please enter a valid positive number";
-          }
-          return true;
-        },
-        filter: (input) => parseFloat(input),
-      },
-      {
-        type: "confirm",
-        name: "isActive",
-        message: "Is Active?",
-        default: true,
-      },
-    ];
+      });
+      const value = parseFloat(trialPeriodInput);
+      if (isNaN(value) || value < 0) {
+        console.log("Please enter a valid positive number");
+        continue;
+      }
+      trialPeriodDays = value;
+      break;
+    }
 
-    const answers = await inquirer.prompt(questions);
-    answers.planFamilyUid = selectedPlanFamilyUid;
+    const isActive = await confirm({
+      message: "Is Active?",
+      default: true,
+    });
+
+    const answers = {
+      name,
+      monthlyRate,
+      trialPeriodDays,
+      isActive,
+      planFamilyUid: selectedPlanFamilyUid,
+    };
+
     console.log("\n🚀 Creating plan...\n");
     const plan = await createPlan(answers);
     console.log(`\n🎉 Success! Plan created.\n`);

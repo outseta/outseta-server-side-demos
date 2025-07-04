@@ -1,5 +1,5 @@
 import "dotenv/config";
-import inquirer from "inquirer";
+import { input } from "@inquirer/prompts";
 import { loginUser } from "./auth-token.js";
 
 process.on("SIGINT", () => {
@@ -11,16 +11,12 @@ process.on("SIGINT", () => {
 async function main() {
   try {
     console.log("🔑 Login");
-    const answers = await inquirer.prompt([
-      {
-        type: "input",
-        name: "email",
-        message: "  Email:",
-      },
-    ]);
+    const email = await input({
+      message: "  Email:",
+    });
 
     console.log("\n🚀 Generating token for user...\n");
-    const { access_token, expires_in, token_type } = await loginUser(answers);
+    const { access_token, expires_in, token_type } = await loginUser({ email });
     console.log(`\n🎉 Success! Token generated.\n`);
     console.log(`   Token type: ${token_type}`);
     console.log(`   JWT: ${access_token.substring(0, 40)}...`);

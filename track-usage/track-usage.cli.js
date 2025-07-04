@@ -1,39 +1,41 @@
 import "dotenv/config";
-import inquirer from "inquirer";
+import { input } from "@inquirer/prompts";
 import { updateUsageBasedPricing } from "./track-usage.js";
 
 // CLI execution
 async function main() {
-  const questions = [
-    {
-      type: "input",
-      name: "accountUid",
-      message: "Enter the Account UID:",
-      validate: (input) => input.trim() !== "" || "Account UID is required",
-    },
-    {
-      type: "input",
-      name: "addOnUid",
-      message: "Enter the Add-on UID:",
-      validate: (input) => input.trim() !== "" || "Add-on UID is required",
-    },
-    {
-      type: "input",
-      name: "amount",
-      message: "Enter the usage amount:",
-      validate: (input) => {
-        const value = parseInt(input, 10);
-        if (isNaN(value) || value <= 0) {
-          return "Amount must be a positive number";
-        }
-        return true;
-      },
-      filter: (input) => parseInt(input, 10),
-    },
-  ];
-
   try {
-    const { accountUid, addOnUid, amount } = await inquirer.prompt(questions);
+    let accountUid;
+    while (true) {
+      accountUid = await input({
+        message: "Enter the Account UID:",
+      });
+      if (accountUid.trim() !== "") break;
+      console.log("Account UID is required");
+    }
+
+    let addOnUid;
+    while (true) {
+      addOnUid = await input({
+        message: "Enter the Add-on UID:",
+      });
+      if (addOnUid.trim() !== "") break;
+      console.log("Add-on UID is required");
+    }
+
+    let amount;
+    while (true) {
+      const amountInput = await input({
+        message: "Enter the usage amount:",
+      });
+      const value = parseInt(amountInput, 10);
+      if (isNaN(value) || value <= 0) {
+        console.log("Amount must be a positive number");
+        continue;
+      }
+      amount = value;
+      break;
+    }
 
     console.log("\n🚀 Track usage...\n");
 
