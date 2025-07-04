@@ -5,7 +5,7 @@ import "dotenv/config";
  * @param {Object} planDetails - The plan details (name, price, planFamilyUid, etc.)
  * @returns {Promise<Object>} - The API response
  */
-async function createPlan({
+export async function createPlan({
   name,
   monthlyRate,
   planFamilyUid,
@@ -47,5 +47,3 @@ async function createPlan({
   }
   return data;
 }
-
-export { createPlan };
