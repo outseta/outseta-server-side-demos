@@ -23,12 +23,14 @@ export async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
 
     if (!accountResponse.ok) {
       throw new Error(
-        `/api/v1/crm/accounts/: [${accountResponse.status}] ${accountResponse.ErrorMessage || accountResponse.Message || ""}`
+        `/api/v1/crm/accounts/: [${accountResponse.status}] ${
+          accountResponse.ErrorMessage || accountResponse.Message || ""
+        }`
       );
     }
 
     const accountData = await accountResponse.json();
-    console.info(`✅ Account data fetched for: ${accountUid}`);
+    console.debug(`✅ Account data fetched for: ${accountUid}`);
 
     // Step 2: Find the correct add-on subscription
     const addOnSubscriptions =
@@ -53,7 +55,7 @@ export async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
       );
     }
 
-    console.info(
+    console.debug(
       `✅ Found add-on subscription: ${targetAddOnSubscription.Uid}`
     );
 
@@ -79,13 +81,15 @@ export async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
     );
 
     const data = await usageResponse.json();
-    console.info("\n--- api/v1/billing/usage response ---");
-    console.info(JSON.stringify(data, null, 2));
-    console.info("------------------------------\n");
+    console.debug("\n--- api/v1/billing/usage response ---");
+    console.debug(JSON.stringify(data, null, 2));
+    console.debug("------------------------------\n");
 
     if (!usageResponse.ok) {
       throw new Error(
-        `/api/v1/billing/usage: [${usageResponse.status}] ${usageResponse.ErrorMessage || usageResponse.Message || ""}`
+        `/api/v1/billing/usage: [${usageResponse.status}] ${
+          usageResponse.ErrorMessage || usageResponse.Message || ""
+        }`
       );
     }
 

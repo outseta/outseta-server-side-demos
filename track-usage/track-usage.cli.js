@@ -1,41 +1,25 @@
 import "dotenv/config";
-import { input } from "@inquirer/prompts";
+import { input, number } from "@inquirer/prompts";
 import { updateUsageBasedPricing } from "./track-usage.js";
 
 // CLI execution
 async function main() {
   try {
-    let accountUid;
-    while (true) {
-      accountUid = await input({
-        message: "Enter the Account UID:",
-      });
-      if (accountUid.trim() !== "") break;
-      console.log("Account UID is required");
-    }
+    const accountUid = await input({
+      message: "Enter the Account UID:",
+      required: true,
+    });
 
-    let addOnUid;
-    while (true) {
-      addOnUid = await input({
-        message: "Enter the Add-on UID:",
-      });
-      if (addOnUid.trim() !== "") break;
-      console.log("Add-on UID is required");
-    }
+    const addOnUid = await input({
+      message: "Enter the Add-on UID:",
+      required: true,
+    });
 
-    let amount;
-    while (true) {
-      const amountInput = await input({
-        message: "Enter the usage amount:",
-      });
-      const value = parseInt(amountInput, 10);
-      if (isNaN(value) || value <= 0) {
-        console.log("Amount must be a positive number");
-        continue;
-      }
-      amount = value;
-      break;
-    }
+    const amount = await number({
+      message: "Enter the usage amount:",
+      min: 1,
+      required: true,
+    });
 
     console.log("\n🚀 Track usage...\n");
 
@@ -58,11 +42,6 @@ async function main() {
     }
   }
 }
-
-process.on("SIGINT", () => {
-  console.log("\nExited.");
-  process.exit(0);
-});
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   main();

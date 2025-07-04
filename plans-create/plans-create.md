@@ -38,9 +38,6 @@ $ npm run plans-create
 
 📦 Fetching available plan families...
 ✔ Select a plan family: Default (UID: E9Lw82Qw)
-
-✅ Selected plan family: Default (UID: E9Lw82Qw)
-
 ✔ Plan Name: More CLI
 ✔ Monthly Rate (USD): 9.99
 ✔ Trial Period Days: 0

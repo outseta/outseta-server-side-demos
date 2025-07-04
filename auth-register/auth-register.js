@@ -5,19 +5,19 @@ import "dotenv/config";
  * @param {Object} user - The user details (email, firstName, lastName, companyName, companyMaskot, coffeePreference)
  * @returns {Promise<Object>} - The API response
  */
-async function registerUser({
+export async function registerUser({
   planUid,
   email,
   firstName,
   lastName,
-  companyName,
-  companyMaskot,
   coffeePreference,
+  accountName,
+  accountMaskot,
 }) {
   try {
     const payload = {
-      Name: companyName,
-      Maskot: companyMaskot,
+      Name: accountName,
+      Maskot: accountMaskot,
       Subscriptions: [
         {
           BillingRenewalTerm: "2", // Now as string
@@ -92,27 +92,3 @@ async function registerUser({
     throw error;
   }
 }
-
-/**
- * Fetches available plans from Outseta
- * @returns {Promise<Array>} - Array of plan objects
- */
-async function getPlans() {
-  const response = await fetch(
-    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/plans`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  if (!response.ok) {
-    throw new Error(`Failed to fetch plans: ${response.status}`);
-  }
-  const data = await response.json();
-  return data.items;
-}
-
-export { registerUser, getPlans };

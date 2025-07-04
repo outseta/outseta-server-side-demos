@@ -25,9 +25,9 @@ async function loginUser({ email }) {
 
     const data = await response.json();
 
-    console.info("--- api/v1/tokens response ---");
-    console.info(JSON.stringify(data, null, 2));
-    console.info("------------------------------");
+    console.debug("--- api/v1/tokens response ---");
+    console.debug(JSON.stringify(data, null, 2));
+    console.debug("------------------------------");
 
     if (!response.ok) {
       throw new Error(

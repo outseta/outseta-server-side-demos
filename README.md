@@ -97,106 +97,15 @@ All scripts require the following environment variables:
 
 > **⚠️ Important Security Note**: These API credentials should only be used in secure server-side environments. Never expose your API Key and Secret in client-side code or public repositories, as this could compromise your account security.
 
-## 🛠️ Development
-
-### Project Structure
-
-```
-outseta-scripts/
-├── README.md              # This file
-├── package.json           # Project dependencies
-├── <demo-name>.js         # Demo script
-├── <demo-name>.md         # Demo documentation
-├── .env.example           # Environment variables template
-└── .env                   # Your environment variables (create this)
-```
-
-### Adding New Demos
-
-When adding new demo scripts, follow this structure:
-
-1. Create the demo script (`<demo-name>.js`)
-   - Follow the structure of existing demos
-   - Include comprehensive error handling
-   - Add detailed console logging
-   - Export functions for programmatic use
-
-2. Create documentation (`<demo-name>.md`)
-   - Explain the purpose and use cases
-   - Provide clear usage instructions
-   - Include code examples
-   - Document API endpoints used
-
-3. Update this README
-   - Add the demo to the [Available Demos](#-available-demos) section
-   - Follow the established format
-
-### Code Style Guidelines
-
-- ✅ Use **async/await** for API calls
-- ✅ Include **detailed console logging** for debugging
-- ✅ Provide **clear error messages** with context
-- ✅ Export **functions** for programmatic use
-- ✅ Include **CLI interface** when appropriate
-- ✅ Add **JSDoc comments** for functions
-- ✅ Use **consistent error handling** patterns
-
-## 🔍 API Reference
-
 ### Official Documentation
 
 - **[Outseta API Documentation](https://developers.outseta.com/)**
 - **[Outseta Support Knowledge Base](https://go.outseta.com/support/kb)**
 
-### Common API Patterns
-
-#### Headers
-
-```javascript
-const headers = {
-  Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
-  "Content-Type": "application/json",
-};
-```
-
-#### Error Handling
-
-```javascript
-if (!response.ok) {
-  const data = await response.json();
-  throw new Error(
-    `API request failed: ${response.status} - ${data.ErrorMessage}`
-  );
-}
-```
-
-#### Response Validation
-
-```javascript
-const data = await response.json();
-if (!data || !data.Uid) {
-  throw new Error("Invalid response format from API");
-}
-```
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to get started:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-demo`)
-3. **Add** your demo script following the guidelines above
-4. **Update** the README with your new demo
-5. **Test** your changes thoroughly
-6. **Submit** a pull request
-
-### Contribution Guidelines
-
-- Follow the existing code style and structure
-- Include comprehensive documentation
-- Add appropriate error handling
-- Test with real Outseta credentials
-- Update the README with your new demo
+Want to add a new demo or improve existing ones? Check out our **[Contributing Guide](CONTRIBUTING.md)** for detailed development guidelines, code patterns, and contribution instructions.
 
 ## 📄 License
 

@@ -1,29 +1,4 @@
 import "dotenv/config";
-// Removed axios import
-
-/**
- * Fetches available plan families from Outseta
- * @returns {Promise<Array>} - Array of plan family objects
- */
-async function getPlanFamilies() {
-  const response = await fetch(
-    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/planfamilies`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  if (!response.ok) {
-    throw new Error(
-      `/api/v1/billing/planfamilies: [${response.status}] ${response.statusText}`
-    );
-  }
-  const data = await response.json();
-  return data.items;
-}
 
 /**
  * Creates a new plan in Outseta
@@ -59,13 +34,15 @@ async function createPlan({
   );
   const data = await response.json();
 
-  console.info("--- api/v1/billing/plans response ---");
-  console.info(JSON.stringify(data, null, 2));
-  console.info("------------------------------");
+  console.debug("--- api/v1/billing/plans response ---");
+  console.debug(JSON.stringify(data, null, 2));
+  console.debug("------------------------------");
 
   if (!response.ok) {
     throw new Error(
-      `/api/v1/billing/plans: [${response.status}] ${data.ErrorMessage || data.Message || response.statusText}`
+      `/api/v1/billing/plans: [${response.status}] ${
+        data.ErrorMessage || data.Message || response.statusText
+      }`
     );
   }
   return data;

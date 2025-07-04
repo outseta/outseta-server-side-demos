@@ -2,25 +2,26 @@ import "dotenv/config";
 import { input } from "@inquirer/prompts";
 import { loginUser } from "./auth-token.js";
 
-process.on("SIGINT", () => {
-  console.log("\nExited.");
-  process.exit(0);
-});
+async function promptForEmail() {
+  const email = await input({
+    message: "  Email:",
+    required: true,
+  });
+  return { email };
+}
 
 // CLI execution
 async function main() {
   try {
-    console.log("🔑 Login");
-    const email = await input({
-      message: "  Email:",
-    });
+    console.info("🔑 Login");
+    const { email } = await promptForEmail();
 
-    console.log("\n🚀 Generating token for user...\n");
+    console.info("\n🚀 Generating token for user...\n");
     const { access_token, expires_in, token_type } = await loginUser({ email });
-    console.log(`\n🎉 Success! Token generated.\n`);
-    console.log(`   Token type: ${token_type}`);
-    console.log(`   JWT: ${access_token.substring(0, 40)}...`);
-    console.log(`   Expires in: ${expires_in} seconds\n`);
+    console.info(`\n🎉 Success! Token generated.\n`);
+    console.info(`   Token type: ${token_type}`);
+    console.info(`   JWT: ${access_token.substring(0, 40)}...`);
+    console.info(`   Expires in: ${expires_in} seconds\n`);
   } catch (error) {
     // Suppress stack trace if user exited with Ctrl+C
     if (error instanceof Error && error.name === "ExitPromptError") {
