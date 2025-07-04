@@ -1,8 +1,10 @@
 # Outseta API Demos
 
-A collection of practical examples and scripts demonstrating how to interact with the Outseta REST API. This repository is designed to help developers learn how to use the API effectively through real-world examples and best practices.
+A collection of practical examples and scripts demonstrating how to interact with the Outseta Admin REST API. This repository is designed to help developers learn how to use the API effectively through real-world examples and best practices.
 
 👉 **[Explore demos](#-available-demos)**
+
+> **⚠️ Important Security Note**: The code in these demos is intended to be used only in secure server-side environments (for example, Zapier, Make, or your own custom server). Do not run this code in client-side (such as websites, web apps or mobile apps) contexts, as it could expose sensitive operations and compromise your security.
 
 ## 🎯 Purpose
 
@@ -78,15 +80,7 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 **Usage**:
 
 ```bash
-node track-usage.js <account-uid> <add-on-uid> <amount>
-```
-
-**Example**:
-
-Add _3_ units of usage to the add-on with UID _j9bpnkmn_ for the account with UID _L9nqkRXQ_.
-
-```bash
-node track-usage.js L9nqkRXQ j9bpnkmn 3
+node track-usage.js
 ```
 
 ---
@@ -112,6 +106,8 @@ All scripts require the following environment variables:
 2. Locate the **Add API Key** button to generate a new API Key and Secret
 3. Add the API Key and Secret to your `.env` file
 
+> **⚠️ Important Security Note**: These API credentials should only be used in secure server-side environments. Never expose your API Key and Secret in client-side code or public repositories, as this could compromise your account security.
+
 ## 🛠️ Development
 
 ### Project Structure
@@ -131,14 +127,12 @@ outseta-scripts/
 When adding new demo scripts, follow this structure:
 
 1. Create the demo script (`<demo-name>.js`)
-
    - Follow the structure of existing demos
    - Include comprehensive error handling
    - Add detailed console logging
    - Export functions for programmatic use
 
 2. Create documentation (`<demo-name>.md`)
-
    - Explain the purpose and use cases
    - Provide clear usage instructions
    - Include code examples

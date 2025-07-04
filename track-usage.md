@@ -28,16 +28,45 @@ Demonstrates how to update usage-based pricing for add-on subscriptions.
 2. Run the demo script using this format:
 
 ```bash
-node track-usage.js <account-uid> <add-on-uid> <usage-amount>
+node track-usage.js
 ```
 
-Example:
+When you run the script, you will be prompted to enter:
+
+- The Account UID
+- The Add-on UID
+- The usage amount (must be a positive number)
+
+**Example session**:
 
 ```bash
-node track-usage.js L9nqkRXQ j9bpnkmn 3
-```
+$ node track-usage.js
+? Enter the Account UID: L9nqkRXQ
+? Enter the Add-on UID: j9bpnkmn
+? Enter the usage amount: 3
 
-**What this does**: Adds 3 units of usage to the add-on subscription for the specified account.
+🚀 Track usage...
+
+✅ Account data fetched for: L9nqkRXQ
+✅ Found add-on subscription: <subscription-add-on-uid>
+
+--- api/v1/billing/usage response ---
+{
+  "Uid": "<usage-uid>",
+  "UsageDate": "2024-06-07T12:34:56.789Z",
+  "Amount": 3,
+  "Created": "2024-06-07T12:34:56.789Z",
+  "Updated": "2024-06-07T12:34:56.789Z"
+}
+------------------------------
+
+🎉 Success! Usage record created
+   Usage UID: <usage-uid>
+   Usage Date: 2024-06-07T12:34:56.789Z
+   Amount: 3
+   Created: 2024-06-07T12:34:56.789Z
+   Updated: 2024-06-07T12:34:56.789Z
+```
 
 ## 📖 Learn More
 
