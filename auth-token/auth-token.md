@@ -24,7 +24,7 @@ Demonstrates how to generate a JWT access token for a user with the Outseta API 
 ## 📋 Prerequisites
 
 - The [global prerequisites](README.md#prerequisites)
-- The user must already exist in Outseta (for example, via the [auth-register](auth-register.md) demo)
+- The user must already exist in Outseta (for example, via the [auth-register](auth-register/auth-register.md) demo)
 
 ## 🚀 Run the demo
 
@@ -58,7 +58,7 @@ $ npm run auth-token
 
 🎉 Success! Token generated.
    Token type: bearer
-   JWT: <jwt-access-token>
+   JWT: <jwt-access-token-truncated-to-40-chars>
    Expires in: <number-of-seconds> seconds
 ```
 

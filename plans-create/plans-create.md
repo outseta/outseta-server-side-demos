@@ -13,7 +13,7 @@ Demonstrates how to create a new subscription plan in Outseta using the API. Thi
 ## Use cases
 
 - Creating a new billing plan programmatically
-  - For example, to use with the [Register User Demo](auth-register.md)
+  - For example, to use with the [Register User Demo](../auth-register/auth-register.md)
   - Or automate Outseta setup for a new client
 
 ## 🗒️ Prerequisites
@@ -94,14 +94,18 @@ const payload = {
   TrialPeriodDays: 0,
   TrialUntilDate: null,
 };
-const response = await axios.post(
-  "https://snippets.outseta.com/api/v1/billing/plans",
-  payload,
-  { headers: { Authorization: `Bearer ${token}` } }
-);
+const response = await fetch("https://api.outseta.com/v1/billing/plans", {
+  method: "POST",
+  headers: {
+    Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(payload),
+});
+const data = await response.json();
 ```
 
-## 📚 Learn More
+## �� Learn More
 
 - [Outseta API Documentation](https://developers.outseta.com/)
 - [Outseta Support Knowledge Base](https://go.outseta.com/support/kb)

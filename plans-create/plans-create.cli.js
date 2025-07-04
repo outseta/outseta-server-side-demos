@@ -58,10 +58,18 @@ async function main() {
         filter: (input) => parseFloat(input),
       },
       {
-        type: "number",
+        type: "input",
         name: "trialPeriodDays",
         message: "Trial Period Days:",
-        default: 14,
+        default: "14",
+        validate: (input) => {
+          const value = parseFloat(input);
+          if (isNaN(value) || value < 0) {
+            return "Please enter a valid positive number";
+          }
+          return true;
+        },
+        filter: (input) => parseFloat(input),
       },
       {
         type: "confirm",

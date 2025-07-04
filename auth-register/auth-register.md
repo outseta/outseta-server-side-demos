@@ -28,7 +28,7 @@ This separation allows Outseta to support both B2B (multiple users per company) 
 ## 📋 Prerequisites
 
 - The [global prerequisites](README.md#prerequisites)
-- A plan must exist in Outseta (for example, via the [plans-create](plans-create.md) demo)
+- A plan must exist in Outseta (for example, via the [plans-create](plans-create/plans-create.md) demo)
 
 ## 🚀 Run the demo
 

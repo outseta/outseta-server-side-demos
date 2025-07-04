@@ -67,12 +67,12 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 
 ## 📚 Available Demos
 
-| Demo               | Guide                     | Source                     | Usage                   |
-| ------------------ | ------------------------- | -------------------------- | ----------------------- |
-| Register User      | [Guide](auth-register.md) | [Source](auth-register.js) | `node auth-register.js` |
-| Generate JWT Token | [Guide](auth-token.md)    | [Source](auth-token.js)    | `node auth-token.js`    |
-| Create Plan        | [Guide](plans-create.md)  | [Source](plans-create.js)  | `node plans-create.js`  |
-| Track Usage        | [Guide](track-usage.md)   | [Source](track-usage.js)   | `node track-usage.js`   |
+| Demo               | Guide                                   | Source                                   | Usage                   |
+| ------------------ | --------------------------------------- | ---------------------------------------- | ----------------------- |
+| Register User      | [Guide](auth-register/auth-register.md) | [Source](auth-register/auth-register.js) | `npm run auth-register` |
+| Generate JWT Token | [Guide](auth-token.md)                  | [Source](auth-token.js)                  | `node auth-token.js`    |
+| Create Plan        | [Guide](plans-create.md)                | [Source](plans-create.js)                | `node plans-create.js`  |
+| Track Usage        | [Guide](track-usage/track-usage.md)     | [Source](track-usage/track-usage.js)     | `npm run track-usage`   |
 
 ---
 
