@@ -83,12 +83,12 @@ async function main() {
     );
   } catch (error) {
     // Suppress stack trace if user exited with Ctrl+C
-    if (error && error.message && error.message.includes("SIGINT")) {
-      console.log("Exited.");
-      process.exit(0);
+    if (error instanceof Error && error.name === "ExitPromptError") {
+      // noop; silence this error
+    } else {
+      console.error(`💥 Failed to register user: ${error.message || error}\n`);
+      process.exit(1);
     }
-    console.error(`💥 Failed to register user: ${error.message || error}\n`);
-    process.exit(1);
   }
 }
 
