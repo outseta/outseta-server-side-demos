@@ -1,5 +1,4 @@
 import "dotenv/config";
-import inquirer from "inquirer";
 
 /**
  * Logs in a user and retrieves a JWT access token
@@ -44,41 +43,4 @@ async function loginUser({ email }) {
   }
 }
 
-// Graceful SIGINT (Ctrl+C) handling
-process.on("SIGINT", () => {
-  console.log("\nExited.");
-  process.exit(0);
-});
-
-// CLI execution
-async function main() {
-  try {
-    console.log("🔑 Login");
-    const answers = await inquirer.prompt([
-      {
-        type: "input",
-        name: "email",
-        message: "  Email:",
-      },
-    ]);
-
-    console.log("\n🚀 Generating token for user...\n");
-    const { access_token, expires_in, token_type } = await loginUser(answers);
-    console.log(`\n🎉 Success! Token generated.\n`);
-    console.log(`   Token type: ${token_type}`);
-    console.log(`   JWT: ${access_token.substring(0, 40)}...`);
-    console.log(`   Expires in: ${expires_in} seconds\n`);
-  } catch (error) {
-    // Suppress stack trace if user exited with Ctrl+C
-    if (error && error.message && error.message.includes("SIGINT")) {
-      console.log("Exited.");
-      process.exit(0);
-    }
-    console.error(`\n💥 Failed to generate token: ${error.message || error}\n`);
-    process.exit(1);
-  }
-}
-
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
-}
+export { loginUser };

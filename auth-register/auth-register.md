@@ -36,7 +36,7 @@ This separation allows Outseta to support both B2B (multiple users per company) 
 2. Run the demo script:
 
 ```bash
-node auth-register.js
+npm run auth-register
 ```
 
 The script will interactively prompt you for Person details (email, first name, last name, coffee preference), Account details (company name, maskot), and then for a subscription plan. No command-line arguments are needed.
@@ -49,7 +49,7 @@ The script will interactively prompt you for Person details (email, first name, 
 **Example session**:
 
 ```bash
-$ node auth-register.js
+$ npm run auth-register
 
 📦 Fetching available plans...
 ? Select a plan: Basic (UID: wQXw3omK)

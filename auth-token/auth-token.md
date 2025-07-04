@@ -32,7 +32,7 @@ Demonstrates how to generate a JWT access token for a user with the Outseta API 
 2. Run the demo script using this format:
 
 ```bash
-node auth-token.js
+npm run auth-token
 ```
 
 When you run the script, you will be prompted to enter:
@@ -42,7 +42,7 @@ When you run the script, you will be prompted to enter:
 **Example session**:
 
 ```bash
-$ node auth-token.js
+$ npm run auth-token
 🔑 Login
   Email: jane@example.com
 
