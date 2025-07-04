@@ -7,7 +7,7 @@ We welcome contributions! This guide will help you understand how to develop and
 ### Project Structure
 
 ```
-outseta-admin-api-demos/
+outseta-server-side-demos/
 ├── README.md              # Project overview and documentation
 ├── package.json           # Project dependencies and scripts
 ├── CONTRIBUTING.md        # This file

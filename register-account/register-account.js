@@ -2,7 +2,7 @@ import "dotenv/config";
 
 /**
  * Registers a new user (person + account) in Outseta
- * @param {Object} user - The user details (email, firstName, lastName, companyName, companyMaskot, coffeePreference)
+ * @param {Object} user - The user details (planUid, email, firstName, lastName, coffeePreference, accountName, accountMaskot)
  * @returns {Promise<Object>} - The API response
  */
 export async function registerUser({
