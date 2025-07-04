@@ -126,11 +126,11 @@ async function main() {
     },
   ];
 
-  const { accountUid, addOnUid, amount } = await inquirer.prompt(questions);
-
-  console.log("\n🚀 Track usage...\n");
-
   try {
+    const { accountUid, addOnUid, amount } = await inquirer.prompt(questions);
+
+    console.log("\n🚀 Track usage...\n");
+
     const result = await updateUsageBasedPricing(accountUid, addOnUid, amount);
     console.log("\n🎉 Success! Usage record created\n");
     console.log(`   Usage UID: ${result.Uid}`);
@@ -140,6 +140,11 @@ async function main() {
     console.log(`   Updated: ${result.Updated}`);
     console.log("");
   } catch (error) {
+    // Suppress stack trace if user exited with Ctrl+C
+    if (error && error.message && error.message.includes("SIGINT")) {
+      console.log("Exited.");
+      process.exit(0);
+    }
     console.error(`\n💥 Failed to track usage: ${error.message}\n`);
     process.exit(1);
   }
