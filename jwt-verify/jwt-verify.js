@@ -88,23 +88,19 @@ export async function verifyWithProfileEndpoint(token) {
  * @returns {Promise<Object>} - Verification results
  */
 export async function verifyJwtToken({ token, method = "both" }) {
-  try {
-    const results = {};
+  const results = {};
 
-    if (method === "jwks" || method === "both") {
-      console.info("🔐 Method 1: Verifying with JWK Set");
-      results.jwksPayload = await verifyWithJWKSet(token);
-    }
-
-    if (method === "profile" || method === "both") {
-      console.info("🔐 Method 2: Verifying with Profile Endpoint");
-      const profileResult = await verifyWithProfileEndpoint(token);
-      results.profilePayload = profileResult.payload;
-      results.profileData = profileResult.profile;
-    }
-
-    return results;
-  } catch (error) {
-    throw error;
+  if (method === "jwks" || method === "both") {
+    console.info("🔐 Method 1: Verifying with JWK Set");
+    results.jwksPayload = await verifyWithJWKSet(token);
   }
+
+  if (method === "profile" || method === "both") {
+    console.info("🔐 Method 2: Verifying with Profile Endpoint");
+    const profileResult = await verifyWithProfileEndpoint(token);
+    results.profilePayload = profileResult.payload;
+    results.profileData = profileResult.profile;
+  }
+
+  return results;
 }
