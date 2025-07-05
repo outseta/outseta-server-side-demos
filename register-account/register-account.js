@@ -19,7 +19,7 @@ export async function registerUser({
     Maskot: accountMaskot,
     Subscriptions: [
       {
-        BillingRenewalTerm: "2", // Now as string
+        BillingRenewalTerm: 2,
         Plan: {
           Uid: planUid,
         },
