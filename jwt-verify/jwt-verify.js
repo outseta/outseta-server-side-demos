@@ -11,6 +11,8 @@ export async function verifyWithJWKSet(token) {
     console.debug("🔍 Verifying token with JWK Set...");
 
     // Create the remote JWK Set
+    // NOTE: For production applications that verify many tokens, consider
+    // implementing caching with an appropriate TTL to reduce overhead
     const JWKS = createRemoteJWKSet(
       new URL(
         `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/.well-known/jwks`
