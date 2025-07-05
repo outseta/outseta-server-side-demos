@@ -88,15 +88,11 @@ function displayResults(results, method) {
     console.info(`   • Email: ${results.profileData.Email}`);
     console.info(`   • First Name: ${results.profileData.FirstName}`);
     console.info(`   • Last Name: ${results.profileData.LastName}`);
-    if (results.profileData.ProfileImageS3Url) {
-      console.info(
-        `   • Profile Image: ${results.profileData.ProfileImageS3Url}`
-      );
-    }
-    if (results.profileData.Account) {
-      console.info(`   • Account Name: ${results.profileData.Account.Name}`);
-      console.info(`   • Account UID: ${results.profileData.Account.Uid}`);
-    }
+    console.info(
+      `   • Profile Image: ${results.profileData.ProfileImageS3Url}`
+    );
+    console.info(`   • Account Name: ${results.profileData.Account.Name}`);
+    console.info(`   • Account UID: ${results.profileData.Account.Uid}`);
   }
 
   console.info("\n✅ Token is valid and verified!");
