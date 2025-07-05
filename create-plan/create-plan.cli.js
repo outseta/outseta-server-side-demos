@@ -74,12 +74,12 @@ async function promptForPlanDetails() {
 
   const monthlyRate = await number({
     message: "Monthly Rate (USD):",
-    default: "9.99",
+    default: 9.99,
   });
 
   const trialPeriodDays = await number({
     message: "Trial Period Days:",
-    default: "14",
+    default: 14,
   });
 
   const isActive = await confirm({
