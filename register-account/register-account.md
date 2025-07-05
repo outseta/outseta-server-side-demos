@@ -294,7 +294,7 @@ const payload = {
   ],
 };
 
-const response = await fetch("https://api.outseta.com/v1/crm/ registrations", {
+const response = await fetch("https://api.outseta.com/v1/crm/registrations", {
   method: "POST",
   headers: {
     Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
