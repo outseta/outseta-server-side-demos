@@ -61,7 +61,7 @@ $ npm run track-usage
 ------------------------------
 
 🎉 Success! Usage record created
-   Usage UID: <usage-uid>
+   Usage UID: R8kLm2Qz
    Usage Date: 2024-06-07T12:34:56.789Z
    Amount: 3
    Created: 2024-06-07T12:34:56.789Z
