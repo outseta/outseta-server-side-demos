@@ -71,6 +71,7 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 | ------------------ | --------------------------------------------- | ---------------------------------------------- | -------------------------- |
 | Register User      | [Guide](register-account/register-account.md) | [Source](register-account/register-account.js) | `npm run register-account` |
 | Generate JWT Token | [Guide](generate-jwt/generate-jwt.md)         | [Source](generate-jwt/generate-jwt.js)         | `npm run generate-jwt`     |
+| Verify JWT Token   | [Guide](jwt-verify/jwt-verify.md)             | [Source](jwt-verify/jwt-verify.js)             | `npm run jwt-verify`       |
 | Create Plan        | [Guide](create-plan/create-plan.md)           | [Source](create-plan/create-plan.js)           | `npm run create-plan`      |
 | Track Usage        | [Guide](track-usage/track-usage.md)           | [Source](track-usage/track-usage.js)           | `npm run track-usage`      |
 
