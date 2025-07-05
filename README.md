@@ -1,10 +1,10 @@
-# Outseta API Demos
+# Outseta Server-Side Demos
 
-A collection of practical examples and scripts demonstrating how to interact with the Outseta Admin REST API. This repository is designed to help developers learn how to use the API effectively through real-world examples and best practices.
+A collection of practical examples and scripts demonstrating how to interact with the Outseta Admin REST API and other relevant server-side operations.
 
 👉 **[Explore demos](#-available-demos)**
 
-> **⚠️ Important Security Note**: The code in these demos is intended to be used only in secure server-side environments (for example, Zapier, Make, or your own custom server). Do not run this code in client-side (such as websites, web apps or mobile apps) contexts, as it could expose sensitive operations and compromise your security.
+> **⚠️ Important Security Note**: The code in these demos is intended to be used only in secure server-side environments (for example, Zapier, Make, or your own custom server). Do not run this code in client-side contexts (such as websites, web apps or mobile apps) as it could expose sensitive operations and compromise your security.
 
 ## 🎯 Purpose
 
@@ -67,25 +67,14 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 
 ## 📚 Available Demos
 
-### Track Usage ([Guide](track-usage.md) | [Source Code](track-usage.js))
-
-**Purpose**: Update usage-based pricing for add-on subscriptions
-
-**Use Cases**:
-
-- Tracking API calls, storage usage, or other metered services
-- Implementing usage-based billing for custom add-ons
-- Automating usage reporting from external systems
-
-**Usage**:
-
-```bash
-node track-usage.js
-```
+| Demo               | Guide                                         | Source                                         | Usage                      |
+| ------------------ | --------------------------------------------- | ---------------------------------------------- | -------------------------- |
+| Register User      | [Guide](register-account/register-account.md) | [Source](register-account/register-account.js) | `npm run register-account` |
+| Generate JWT Token | [Guide](generate-jwt/generate-jwt.md)         | [Source](generate-jwt/generate-jwt.js)         | `npm run generate-jwt`     |
+| Create Plan        | [Guide](create-plan/create-plan.md)           | [Source](create-plan/create-plan.js)           | `npm run create-plan`      |
+| Track Usage        | [Guide](track-usage/track-usage.md)           | [Source](track-usage/track-usage.js)           | `npm run track-usage`      |
 
 ---
-
-_More demos coming soon!_
 
 ## 🔧 Configuration
 
@@ -108,124 +97,28 @@ All scripts require the following environment variables:
 
 > **⚠️ Important Security Note**: These API credentials should only be used in secure server-side environments. Never expose your API Key and Secret in client-side code or public repositories, as this could compromise your account security.
 
-## 🛠️ Development
-
-### Project Structure
-
-```
-outseta-scripts/
-├── README.md              # This file
-├── package.json           # Project dependencies
-├── <demo-name>.js         # Demo script
-├── <demo-name>.md         # Demo documentation
-├── .env.example           # Environment variables template
-└── .env                   # Your environment variables (create this)
-```
-
-### Adding New Demos
-
-When adding new demo scripts, follow this structure:
-
-1. Create the demo script (`<demo-name>.js`)
-   - Follow the structure of existing demos
-   - Include comprehensive error handling
-   - Add detailed console logging
-   - Export functions for programmatic use
-
-2. Create documentation (`<demo-name>.md`)
-   - Explain the purpose and use cases
-   - Provide clear usage instructions
-   - Include code examples
-   - Document API endpoints used
-
-3. Update this README
-   - Add the demo to the [Available Demos](#-available-demos) section
-   - Follow the established format
-
-### Code Style Guidelines
-
-- ✅ Use **async/await** for API calls
-- ✅ Include **detailed console logging** for debugging
-- ✅ Provide **clear error messages** with context
-- ✅ Export **functions** for programmatic use
-- ✅ Include **CLI interface** when appropriate
-- ✅ Add **JSDoc comments** for functions
-- ✅ Use **consistent error handling** patterns
-
-## 🔍 API Reference
-
 ### Official Documentation
 
 - **[Outseta API Documentation](https://developers.outseta.com/)**
 - **[Outseta Support Knowledge Base](https://go.outseta.com/support/kb)**
 
-### Common API Patterns
-
-#### Headers
-
-```javascript
-const headers = {
-  Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
-  "Content-Type": "application/json",
-};
-```
-
-#### Error Handling
-
-```javascript
-if (!response.ok) {
-  const data = await response.json();
-  throw new Error(
-    `API request failed: ${response.status} - ${data.ErrorMessage}`
-  );
-}
-```
-
-#### Response Validation
-
-```javascript
-const data = await response.json();
-if (!data || !data.Uid) {
-  throw new Error("Invalid response format from API");
-}
-```
-
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to get started:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-demo`)
-3. **Add** your demo script following the guidelines above
-4. **Update** the README with your new demo
-5. **Test** your changes thoroughly
-6. **Submit** a pull request
-
-### Contribution Guidelines
-
-- Follow the existing code style and structure
-- Include comprehensive documentation
-- Add appropriate error handling
-- Test with real Outseta credentials
-- Update the README with your new demo
+Want to add a new demo or improve existing ones? Check out our **[Contributing Guide](CONTRIBUTING.md)** for detailed development guidelines, code patterns, and contribution instructions.
 
 ## 📄 License
 
 This project is licensed under the ISC License - see [package.json](package.json) for details.
 
-## 🆘 Support & Resources
-
-### Getting Help
+## 📖 Learn More
 
 - **[Outseta Documentation](https://go.outseta.com/support/kb)** - Official Outseta help
 - **[Outseta API Documentation](https://documenter.getpostman.com/view/3613332/outseta-rest-api-v1/7TNfr6k)** - Complete API reference
+
+## 🆘 Support
+
 - **[GitHub Issues](https://github.com/outseta/outseta-api-demos/issues)** - Report bugs or request features
 - **[Email Support](mailto:support@outseta.com)** - Direct support from Outseta
-
-### Additional Resources
-
-- **[Usage-based Pricing Guide](https://go.outseta.com/support/kb/articles/dpWr3mnq/usage-based-metered-pricing)** - Learn about metered billing
-- **[Outseta Developer Community](https://developers.outseta.com/)** - Connect with other developers
 
 ---
 
@@ -235,7 +128,3 @@ This project is licensed under the ISC License - see [package.json](package.json
 - **Test First**: Always test thoroughly in a development environment before using in production
 - **API Limits**: Be mindful of Outseta's API rate limits
 - **Security**: Never commit your `.env` file or expose API credentials
-
----
-
-**Ready to get started?** Check out the [Track Usage demo](#-track-usage) for a practical example!

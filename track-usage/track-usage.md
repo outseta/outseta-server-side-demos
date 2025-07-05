@@ -28,7 +28,7 @@ Demonstrates how to update usage-based pricing for add-on subscriptions.
 2. Run the demo script using this format:
 
 ```bash
-node track-usage.js
+npm run track-usage
 ```
 
 When you run the script, you will be prompted to enter:
@@ -40,7 +40,7 @@ When you run the script, you will be prompted to enter:
 **Example session**:
 
 ```bash
-$ node track-usage.js
+$ npm run track-usage
 ? Enter the Account UID: L9nqkRXQ
 ? Enter the Add-on UID: j9bpnkmn
 ? Enter the usage amount: 3
@@ -61,7 +61,7 @@ $ node track-usage.js
 ------------------------------
 
 🎉 Success! Usage record created
-   Usage UID: <usage-uid>
+   Usage UID: R8kLm2Qz
    Usage Date: 2024-06-07T12:34:56.789Z
    Amount: 3
    Created: 2024-06-07T12:34:56.789Z
