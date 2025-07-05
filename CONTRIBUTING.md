@@ -108,10 +108,11 @@ const headers = {
 #### Error Handling
 
 ```javascript
+const data = await response.json();
 if (!accountResponse.ok) {
   throw new Error(
     `/api/v1/some/endpoint: [${accountResponse.status}] ${
-      accountResponse.ErrorMessage || accountResponse.Message || ""
+      data.ErrorMessage || data.Message || ""
     }`
   );
 }

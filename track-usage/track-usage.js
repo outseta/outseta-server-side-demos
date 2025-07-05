@@ -20,15 +20,15 @@ export async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
     }
   );
 
+  const accountData = await accountResponse.json();
   if (!accountResponse.ok) {
     throw new Error(
       `/api/v1/crm/accounts/: [${accountResponse.status}] ${
-        accountResponse.ErrorMessage || accountResponse.Message || ""
+        accountData.ErrorMessage || accountData.Message || ""
       }`
     );
   }
 
-  const accountData = await accountResponse.json();
   console.debug(`✅ Account data fetched for: ${accountUid}`);
 
   // Step 2: Find the correct add-on subscription
@@ -77,18 +77,18 @@ export async function updateUsageBasedPricing(accountUid, addOnUid, amount) {
     }
   );
 
-  const data = await usageResponse.json();
+  const usageData = await usageResponse.json();
   console.debug("\n--- api/v1/billing/usage response ---");
-  console.debug(JSON.stringify(data, null, 2));
+  console.debug(JSON.stringify(usageData, null, 2));
   console.debug("------------------------------\n");
 
   if (!usageResponse.ok) {
     throw new Error(
       `/api/v1/billing/usage: [${usageResponse.status}] ${
-        usageResponse.ErrorMessage || usageResponse.Message || ""
+        usageData.ErrorMessage || usageData.Message || ""
       }`
     );
   }
 
-  return data;
+  return usageData;
 }
