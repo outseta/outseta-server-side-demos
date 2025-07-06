@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "register-account": "node register-account/register-account.cli.js",
     "generate-jwt": "node generate-jwt/generate-jwt.cli.js",
-    "jwt-verify": "node jwt-verify/jwt-verify.cli.js",
+    "verify-jwt": "node verify-jwt/verify-jwt.cli.js",
     "create-plan": "node create-plan/create-plan.cli.js",
     "track-usage": "node track-usage/track-usage.cli.js"
   },
