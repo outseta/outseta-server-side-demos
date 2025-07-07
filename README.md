@@ -73,6 +73,7 @@ node track-usage.js L9nqkRXQ j9bpnkmn 3
 | Generate JWT Token | [Guide](generate-jwt/generate-jwt.md)         | [Source](generate-jwt/generate-jwt.js)         | `npm run generate-jwt`     |
 | Verify JWT Token   | [Guide](verify-jwt/verify-jwt.md)             | [Source](verify-jwt/verify-jwt.js)             | `npm run verify-jwt`       |
 | Create Plan        | [Guide](create-plan/create-plan.md)           | [Source](create-plan/create-plan.js)           | `npm run create-plan`      |
+| Change Plan        | [Guide](change-plan/change-plan.md)           | [Source](change-plan/change-plan.js)           | `npm run change-plan`      |
 | Track Usage        | [Guide](track-usage/track-usage.md)           | [Source](track-usage/track-usage.js)           | `npm run track-usage`      |
 
 ---
