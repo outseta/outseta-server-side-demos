@@ -8,14 +8,14 @@ Demonstrates how to register a new Account with a Person attached (aka. register
 
 - Prompts for a subscription plan
 - Prompts for person details (email, first name, last name, coffee preference)
-- Prompts for account details (name, maskot)
+- Prompts for account details (name, mascot)
 - Creates a new Account and Person in Outseta
 - Subscribed the Account to the selected plan
 - Logs the created Account and Person or any errors
 
 ## Outseta: Account vs. Person
 
-- **Account**: Represents a company, organization, or team. Each Account can have one or more associated people (users). In this demo, the Account is created with a `Name` (company name) and a custom field `Maskot`.
+- **Account**: Represents a company, organization, or team. Each Account can have one or more associated people (users). In this demo, the Account is created with a `Name` (company name) and a custom field `Mascot`.
 - **Person**: Represents an individual user. Each Person is associated with zero, one or multiple Accounts. In this demo, the Person is created with their name, email, and a custom field `CoffeePreference`.
 
 This separation allows Outseta to support both B2B (multiple users per company) and B2C (one user per account) use cases.
@@ -42,7 +42,7 @@ It also allows for people who have not yet subscribed to a plan, but has registe
 npm run register-account
 ```
 
-The script will interactively prompt you for Person details (email, first name, last name, coffee preference), Account details (company name, maskot), and then for a subscription plan. No command-line arguments are needed.
+The script will interactively prompt you for Person details (email, first name, last name, coffee preference), Account details (company name, mascot), and then for a subscription plan. No command-line arguments are needed.
 
 ### Plan Selection
 
@@ -67,7 +67,7 @@ $ npm run register-account
 
 🏢 Enter Account details:
   Company Name: Acme Inc
-  Company Maskot: Roadrunner
+  Company Mascot: Roadrunner
 
 🚀 Registering user...
 
@@ -248,7 +248,7 @@ $ npm run register-account
   "Uid": "mN4qRt8V",
   "Created": "2024-06-01T12:00:00Z",
   "Updated": "2024-06-01T12:00:00Z",
-  "Maskot": "Roadrunner"
+  "Mascot": "Roadrunner"
 }
 ------------------------------
 
@@ -259,7 +259,7 @@ $ npm run register-account
    • Last Name: Doe
    • Coffee Preference: Latte
    • Company Name: Acme Inc
-   • Company Maskot: Roadrunner
+   • Company Mascot: Roadrunner
 
 ℹ️ You may generate a token on their behalf in a server side environment (even before they have set their password) using the [generate-jwt](generate-jwt.md) demo.
 ```
@@ -274,7 +274,7 @@ $ npm run register-account
 ```javascript
 const payload = {
   Name: "Acme Inc",
-  Maskot: "Roadrunner",
+  Mascot: "Roadrunner",
   Subscriptions: [
     {
       Plan: { Uid: "wQXw3omK" },
