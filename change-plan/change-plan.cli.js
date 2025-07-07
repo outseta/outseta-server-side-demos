@@ -182,11 +182,11 @@ async function main() {
 
     console.info("\n🔍 Previewing subscription plan change...\n");
 
-    const preview = await previewPlanChange(
-      account.Uid,
-      newPlan.Uid,
-      startImmediately
-    );
+    const preview = await previewPlanChange({
+      accountUid: account.Uid,
+      newPlanUid: newPlan.Uid,
+      startImmediately,
+    });
 
     // Display preview information
     console.info("📋 Plan Change Preview:");
@@ -251,7 +251,11 @@ async function main() {
 
     console.info("\n🚀 Changing subscription plan...\n");
 
-    const result = await changePlan(account.Uid, newPlan.Uid, startImmediately);
+    const result = await changePlan({
+      accountUid: account.Uid,
+      newPlanUid: newPlan.Uid,
+      startImmediately,
+    });
 
     console.info("\n🎉 Success! Subscription plan changed.");
     console.info("");
