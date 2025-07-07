@@ -22,7 +22,7 @@ export async function changePlan(accountUid, newPlanUid) {
   const accountData = await accountResponse.json();
   if (!accountResponse.ok) {
     throw new Error(
-      `/api/v1/crm/accounts/: [${accountResponse.status}] ${
+      `/api/v1/crm/accounts/${accountUid}: [${accountResponse.status}] ${
         accountData.ErrorMessage || accountData.Message || ""
       }`
     );
