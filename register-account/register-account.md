@@ -254,12 +254,12 @@ $ npm run register-account
 
 📮 A confirmation email has been sent to the user. They must follow the link in the email to set their password and activate their account before logging in.
 
-   Email: jane@example.com
-   First Name: Jane
-   Last Name: Doe
-   Coffee Preference: Latte
-   Company Name: Acme Inc
-   Company Maskot: Roadrunner
+   • Email: jane@example.com
+   • First Name: Jane
+   • Last Name: Doe
+   • Coffee Preference: Latte
+   • Company Name: Acme Inc
+   • Company Maskot: Roadrunner
 
 ℹ️ You may generate a token on their behalf in a server side environment (even before they have set their password) using the [generate-jwt](generate-jwt.md) demo.
 ```

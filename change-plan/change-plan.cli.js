@@ -87,7 +87,9 @@ async function promptForAccount() {
 
     // Show current plan if available
     if (account.CurrentSubscription?.Plan?.Name) {
-      console.info(`   Current plan: ${account.CurrentSubscription.Plan.Name}`);
+      console.info(
+        `   • Current plan: ${account.CurrentSubscription.Plan.Name}`
+      );
     }
 
     return account;
@@ -179,21 +181,25 @@ async function main() {
     console.info("📋 Plan Change Preview:");
     console.info("");
     console.info(
-      `   Current Plan: ${account.CurrentSubscription?.Plan?.Name || "Unknown"}`
+      `   • Current Plan: ${
+        account.CurrentSubscription?.Plan?.Name || "Unknown"
+      }`
     );
-    console.info(`   New Plan: ${newPlan.Name}`);
+    console.info(`   • New Plan: ${newPlan.Name}`);
 
     // Show invoice preview details
     if (preview.InvoiceDate) {
       console.info(
-        `   Invoice Date: ${new Date(preview.InvoiceDate).toLocaleDateString()}`
+        `   • Invoice Date: ${new Date(
+          preview.InvoiceDate
+        ).toLocaleDateString()}`
       );
     }
-    console.info(`   Subtotal: $${preview.Subtotal}`);
-    console.info(`   Tax: $${preview.Tax}`);
-    console.info(`   Total: $${preview.Total}`);
-    console.info(`   Balance: $${preview.Balance}`);
-    console.info(`   Refunded: $${preview.Refunded}`);
+    console.info(`   • Subtotal: $${preview.Subtotal}`);
+    console.info(`   • Tax: $${preview.Tax}`);
+    console.info(`   • Total: $${preview.Total}`);
+    console.info(`   • Balance: $${preview.Balance}`);
+    console.info(`   • Refunded: $${preview.Refunded}`);
 
     // Show line items if available
     if (preview.InvoiceDisplayItems && preview.InvoiceDisplayItems.length > 0) {
@@ -238,9 +244,9 @@ async function main() {
 
     console.info("\n🎉 Success! Subscription plan changed.");
     console.info("");
-    console.info(`   Account: ${account.Name}`);
-    console.info(`   Subscription UID: ${result.Uid}`);
-    console.info(`   New Plan: ${newPlan.Name}`);
+    console.info(`   • Account: ${account.Name}`);
+    console.info(`   • Subscription UID: ${result.Uid}`);
+    console.info(`   • New Plan: ${newPlan.Name}`);
     console.info("");
   } catch (error) {
     // Suppress stack trace if user exited with Ctrl+C

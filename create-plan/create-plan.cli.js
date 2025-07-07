@@ -109,11 +109,11 @@ async function main() {
     });
 
     console.info(`\n🎉 Success! Plan created.\n`);
-    console.info(`   Plan UID: ${plan.Uid}`);
-    console.info(`   Plan Name: ${plan.Name}`);
-    console.info(`   Monthly Rate: ${plan.MonthlyRate}`);
-    console.info(`   Trial Period Days: ${plan.TrialPeriodDays}`);
-    console.info(`   Is Active: ${plan.IsActive}`);
+    console.info(`   • Plan UID: ${plan.Uid}`);
+    console.info(`   • Plan Name: ${plan.Name}`);
+    console.info(`   • Monthly Rate: ${plan.MonthlyRate}`);
+    console.info(`   • Trial Period Days: ${plan.TrialPeriodDays}`);
+    console.info(`   • Is Active: ${plan.IsActive}`);
     console.info("");
   } catch (error) {
     // Suppress stack trace if user exited with Ctrl+C

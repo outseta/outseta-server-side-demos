@@ -51,7 +51,7 @@ $ npm run change-plan
 🔍 Searching for accounts...
 
 ✅ Found account: Acme Inc (UID: mN4qRt8V)
-   Current plan: Basic Plan
+   • Current plan: Basic Plan
 
 📦 Fetching available plans...
 ? Select a new plan: Premium Plan (UID: DQ2oVq9V) - 29.99/month - Enhanced features and priority support
@@ -60,14 +60,14 @@ $ npm run change-plan
 
 📋 Plan Change Preview:
 
-   Current Plan: Basic Plan
-   New Plan: Premium Plan
-   Invoice Date: 7/16/2024
-   Subtotal: 0
-   Tax: 0
-   Total: 0
-   Balance: 0
-   Refunded: 0
+   • Current Plan: Basic Plan
+   • New Plan: Premium Plan
+   • Invoice Date: 7/16/2024
+   • Subtotal: 0
+   • Tax: 0
+   • Total: 0
+   • Balance: 0
+   • Refunded: 0
 
    📄 Invoice Line Items:
    1. 16-Jul-24 - 16-Aug-24: Premium Plan
@@ -106,9 +106,9 @@ $ npm run change-plan
 
 🎉 Success! Subscription plan changed.
 
-   Account: Acme Inc
-   Subscription UID: Qw8nZp2R
-   New Plan: Premium Plan
+   • Account: Acme Inc
+   • Subscription UID: Qw8nZp2R
+   • New Plan: Premium Plan
 ```
 
 ## API Endpoints Used

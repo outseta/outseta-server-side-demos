@@ -57,9 +57,9 @@ $ npm run generate-jwt
 ------------------------------
 
 🎉 Success! Token generated.
-   Token type: bearer
-   JWT: <jwt-access-token-truncated-to-40-chars>
-   Expires in: <number-of-seconds> seconds
+   • Token type: bearer
+   • JWT: <jwt-access-token-truncated-to-40-chars>
+   • Expires in: <number-of-seconds> seconds
 ```
 
 ## What happens next?

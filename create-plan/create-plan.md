@@ -65,11 +65,11 @@ $ npm run create-plan
 
 🎉 Success! Plan created.
 
-   Plan UID: DQ2oVq9V
-   Plan Name: More CLI
-   Monthly Rate: 9.99
-   Trial Period Days: 0
-   Is Active: true
+   • Plan UID: DQ2oVq9V
+   • Plan Name: More CLI
+   • Monthly Rate: 9.99
+   • Trial Period Days: 0
+   • Is Active: true
 
 ```
 
