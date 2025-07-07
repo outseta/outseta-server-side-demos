@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { input, select } from "@inquirer/prompts";
-import { verifyJwtToken } from "./jwt-verify.js";
+import { verifyJwtToken } from "./verify-jwt.js";
 
 /**
  * Prompts for the JWT token to verify

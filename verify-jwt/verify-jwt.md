@@ -32,7 +32,7 @@ Demonstrates how to verify Outseta JWT access tokens server-side using two diffe
 2. Run the demo script:
 
 ```bash
-npm run jwt-verify
+npm run verify-jwt
 ```
 
 When you run the script, you will be prompted to enter:
@@ -43,7 +43,7 @@ When you run the script, you will be prompted to enter:
 **Example session**:
 
 ```bash
-$ npm run jwt-verify
+$ npm run verify-jwt
 🔐 JWT Token Verification
 This demo verifies Outseta JWT access tokens using two methods:
 
