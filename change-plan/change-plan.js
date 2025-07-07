@@ -150,7 +150,7 @@ export async function previewPlanChange(accountUid, newPlanUid) {
 
   if (!previewResponse.ok) {
     throw new Error(
-      `/api/v1/billing/subscriptions/changeSubscriptionPreview: [${
+      `/api/v1/billing/subscriptions/changesubscriptionpreview: [${
         previewResponse.status
       }] ${previewData.ErrorMessage || previewData.Message || ""}`
     );
