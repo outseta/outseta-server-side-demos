@@ -26,11 +26,11 @@ async function main() {
     const result = await updateUsageBasedPricing(accountUid, addOnUid, amount);
     console.log("\n🎉 Success! Usage record created");
     console.log("");
-    console.log(`   Usage UID: ${result.Uid}`);
-    console.log(`   Usage Date: ${result.UsageDate}`);
-    console.log(`   Amount: ${result.Amount}`);
-    console.log(`   Created: ${result.Created}`);
-    console.log(`   Updated: ${result.Updated}`);
+    console.log(`   • Usage UID: ${result.Uid}`);
+    console.log(`   • Usage Date: ${result.UsageDate}`);
+    console.log(`   • Amount: ${result.Amount}`);
+    console.log(`   • Created: ${result.Created}`);
+    console.log(`   • Updated: ${result.Updated}`);
     console.log("");
   } catch (error) {
     // Suppress stack trace if user exited with Ctrl+C

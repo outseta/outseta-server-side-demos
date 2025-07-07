@@ -19,9 +19,9 @@ async function main() {
     console.info("\n🚀 Generating token for user...\n");
     const { access_token, expires_in, token_type } = await loginUser({ email });
     console.info(`\n🎉 Success! Token generated.\n`);
-    console.info(`   Token type: ${token_type}`);
-    console.info(`   JWT: ${access_token.substring(0, 40)}...`);
-    console.info(`   Expires in: ${expires_in} seconds\n`);
+    console.info(`   • Token type: ${token_type}`);
+    console.info(`   • JWT: ${access_token.substring(0, 40)}...`);
+    console.info(`   • Expires in: ${expires_in} seconds\n`);
   } catch (error) {
     // Suppress stack trace if user exited with Ctrl+C
     if (error instanceof Error && error.name === "ExitPromptError") {

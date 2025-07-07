@@ -98,12 +98,12 @@ async function main() {
       "📮 A confirmation email has been sent to the user. They must follow the link in the email to set their password and activate their account before logging in."
     );
     console.info("");
-    console.info(`   Email: ${PrimaryContact?.Email}`);
-    console.info(`   First Name: ${PrimaryContact?.FirstName}`);
-    console.info(`   Last Name: ${PrimaryContact?.LastName}`);
-    console.info(`   Coffee Preference: ${PrimaryContact?.CoffeePreference}`);
-    console.info(`   Company Name: ${Name}`);
-    console.info(`   Company Maskot: ${Maskot}`);
+    console.info(`   • Email: ${PrimaryContact?.Email}`);
+    console.info(`   • First Name: ${PrimaryContact?.FirstName}`);
+    console.info(`   • Last Name: ${PrimaryContact?.LastName}`);
+    console.info(`   • Coffee Preference: ${PrimaryContact?.CoffeePreference}`);
+    console.info(`   • Company Name: ${Name}`);
+    console.info(`   • Company Maskot: ${Maskot}`);
     console.info("");
 
     console.info(
