@@ -74,7 +74,7 @@ async function promptForAccount() {
     required: true,
   });
 
-  console.info("\n🔍 Searching for accounts...");
+  console.info("\n🔍 Searching for accounts...\n");
   const accounts = await findAccountsByEmail(email);
 
   if (accounts.length === 0) {
@@ -172,10 +172,21 @@ async function main() {
     }
 
     const newPlan = await promptForPlan(account);
+    console.info("");
+
+    // Ask if changes should start immediately
+    const startImmediately = await confirm({
+      message: "Should the plan change start immediately?",
+      default: false,
+    });
 
     console.info("\n🔍 Previewing subscription plan change...\n");
 
-    const preview = await previewPlanChange(account.Uid, newPlan.Uid);
+    const preview = await previewPlanChange(
+      account.Uid,
+      newPlan.Uid,
+      startImmediately
+    );
 
     // Display preview information
     console.info("📋 Plan Change Preview:");
@@ -240,7 +251,7 @@ async function main() {
 
     console.info("\n🚀 Changing subscription plan...\n");
 
-    const result = await changePlan(account.Uid, newPlan.Uid);
+    const result = await changePlan(account.Uid, newPlan.Uid, startImmediately);
 
     console.info("\n🎉 Success! Subscription plan changed.");
     console.info("");
