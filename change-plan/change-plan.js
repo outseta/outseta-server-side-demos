@@ -64,13 +64,14 @@ export async function changePlan(accountUid, newPlanUid) {
   );
 
   const subscriptionData = await subscriptionResponse.json();
-  console.debug("\n--- api/v1/billing/subscriptions response ---");
+  const endpoint = `/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscription`;
+  console.debug(`\n--- ${endpoint} response ---`);
   console.debug(JSON.stringify(subscriptionData, null, 2));
   console.debug("------------------------------\n");
 
   if (!subscriptionResponse.ok) {
     throw new Error(
-      `/api/v1/billing/subscriptions: [${subscriptionResponse.status}] ${
+      `${endpoint}: [${subscriptionResponse.status}] ${
         subscriptionData.ErrorMessage || subscriptionData.Message || ""
       }`
     );
@@ -143,17 +144,16 @@ export async function previewPlanChange(accountUid, newPlanUid) {
   );
 
   const previewData = await previewResponse.json();
-  console.debug(
-    "\n--- api/v1/billing/subscriptions/changeSubscriptionPreview response ---"
-  );
+  const endpoint = `/api/v1/billing/subscriptions/${currentSubscription.Uid}/changesubscriptionpreview`;
+  console.debug(`\n--- ${endpoint} response ---`);
   console.debug(JSON.stringify(previewData, null, 2));
   console.debug("------------------------------\n");
 
   if (!previewResponse.ok) {
     throw new Error(
-      `/api/v1/billing/subscriptions/changesubscriptionpreview: [${
-        previewResponse.status
-      }] ${previewData.ErrorMessage || previewData.Message || ""}`
+      `${endpoint}: [${previewResponse.status}] ${
+        previewData.ErrorMessage || previewData.Message || ""
+      }`
     );
   }
 
