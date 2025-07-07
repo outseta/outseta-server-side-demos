@@ -42,14 +42,17 @@ export async function changePlan(accountUid, newPlanUid) {
 
   // Step 3: Update the subscription with the new plan
   const subscriptionUpdatePayload = {
-    Uid: currentSubscription.Uid,
     Plan: {
       Uid: newPlanUid,
+    },
+    BillingRenewalTerm: currentSubscription.BillingRenewalTerm,
+    Account: {
+      Uid: accountUid,
     },
   };
 
   const subscriptionResponse = await fetch(
-    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}`,
+    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscription`,
     {
       method: "PUT",
       headers: {
