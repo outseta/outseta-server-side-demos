@@ -62,10 +62,19 @@ $ npm run change-plan
 
    Current Plan: Basic Plan
    New Plan: Premium Plan
-   New Monthly Rate: 29.99
-   Proration Amount: 15.32
-   Next Bill Date: 7/7/2024
-   Effective Date: 6/7/2024
+   Invoice Date: 7/16/2024
+   Subtotal: 0
+   Tax: 0
+   Total: 0
+   Balance: 0
+   Refunded: 0
+
+   📄 Invoice Line Items:
+   1. 16-Jul-24 - 16-Aug-24: Premium Plan
+      Type: Charge
+      Amount: 0
+      Period: 7/16/2024 - 8/16/2024
+      Renewal Term: Monthly
 
 ? Do you want to proceed with this plan change? Yes
 
@@ -107,7 +116,7 @@ $ npm run change-plan
 - `GET /api/v1/crm/accounts?PrimaryContact.Email={email}` - Search for accounts by email
 - `GET /api/v1/crm/accounts/{uid}?fields=Uid,Name,CurrentSubscription.*` - Fetch account with subscription details
 - `GET /api/v1/billing/plans` - Fetch available plans
-- `POST /api/v1/billing/subscriptions/{subscription_uid}/changeSubscriptionPreview` - Preview subscription plan change
+- `PUT /api/v1/billing/subscriptions/{subscription_uid}/changesubscriptionpreview` - Preview subscription plan change
 - `PUT /api/v1/billing/subscriptions/{subscription_uid}/changeSubscription` - Update subscription plan
 
 ## Core Code Examples
@@ -173,9 +182,9 @@ const previewPayload = {
 };
 
 const previewResponse = await fetch(
-  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscriptionPreview`,
+  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changesubscriptionpreview`,
   {
-    method: "POST",
+    method: "PUT",
     headers: {
       Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
       "Content-Type": "application/json",
