@@ -9,6 +9,7 @@
     "generate-jwt": "node generate-jwt/generate-jwt.cli.js",
     "verify-jwt": "node verify-jwt/verify-jwt.cli.js",
     "create-plan": "node create-plan/create-plan.cli.js",
+    "change-plan": "node change-plan/change-plan.cli.js",
     "track-usage": "node track-usage/track-usage.cli.js"
   },
   "author": "",
