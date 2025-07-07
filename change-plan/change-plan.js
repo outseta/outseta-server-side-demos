@@ -2,11 +2,17 @@ import "dotenv/config";
 
 /**
  * Changes the subscription plan for an account in Outseta
- * @param {string} accountUid - The unique identifier for the account
- * @param {string} newPlanUid - The unique identifier for the new plan to change to
+ * @param {Object} options - The options object
+ * @param {string} options.accountUid - The unique identifier for the account
+ * @param {string} options.newPlanUid - The unique identifier for the new plan to change to
+ * @param {boolean} [options.startImmediately=false] - Whether the changes should start immediately
  * @returns {Promise<Object>} - The API response
  */
-export async function changePlan(accountUid, newPlanUid) {
+export async function changePlan({
+  accountUid,
+  newPlanUid,
+  startImmediately = false,
+}) {
   // Step 1: Fetch the account with current subscription info
   const accountResponse = await fetch(
     `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/crm/accounts/${accountUid}?fields=Uid,Name,CurrentSubscription.*`,
@@ -52,7 +58,7 @@ export async function changePlan(accountUid, newPlanUid) {
   };
 
   const subscriptionResponse = await fetch(
-    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscription`,
+    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscription?startImmediately=${startImmediately}`,
     {
       method: "PUT",
       headers: {
@@ -82,11 +88,19 @@ export async function changePlan(accountUid, newPlanUid) {
 
 /**
  * Previews the subscription plan change without making any actual changes
- * @param {string} accountUid - The unique identifier for the account
- * @param {string} newPlanUid - The unique identifier for the new plan to preview
+ * @param {Object} options - The options object
+ * @param {string} options.accountUid - The unique identifier for the account
+ * @param {string} options.newPlanUid - The unique identifier for the new plan to preview
+ * @param {boolean} [options.startImmediately=false] - Whether the changes should start immediately
  * @returns {Promise<Object>} - The preview response
  */
-export async function previewPlanChange(accountUid, newPlanUid) {
+export async function previewPlanChange({
+  accountUid,
+  newPlanUid,
+  startImmediately = false,
+}) {
+  console.debug(`previewPlanChange startImmediately: ${startImmediately}`);
+
   // Step 1: Fetch the account with current subscription info
   const accountResponse = await fetch(
     `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/crm/accounts/${accountUid}?fields=Uid,Name,CurrentSubscription.*`,
@@ -132,7 +146,7 @@ export async function previewPlanChange(accountUid, newPlanUid) {
   };
 
   const previewResponse = await fetch(
-    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changesubscriptionpreview`,
+    `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changesubscriptionpreview?startImmediately=${startImmediately}`,
     {
       method: "PUT",
       headers: {

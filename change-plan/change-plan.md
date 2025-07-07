@@ -10,9 +10,10 @@ Demonstrates how to change a user's subscription plan in Outseta using the API. 
 - Handles multiple accounts per email (prompts for selection)
 - Displays current subscription plan information
 - Fetches available plans and filters out the current plan
+- Prompts whether the plan change should start immediately
 - Previews the plan change with proration details and billing information
 - Asks for confirmation before proceeding
-- Updates the subscription with the selected new plan
+- Updates the subscription with the selected new plan and timing
 - Provides detailed logging and error handling
 
 ## Use cases
@@ -41,6 +42,7 @@ When you run the script, you will be prompted to enter:
 - The user's email address
 - Account selection (if multiple accounts exist for the email)
 - New plan selection from available plans
+- Whether the plan change should start immediately
 
 **Example session**:
 
@@ -55,6 +57,8 @@ $ npm run change-plan
 
 📦 Fetching available plans...
 ? Select a new plan: Premium Plan (UID: DQ2oVq9V) - 29.99/month - Enhanced features and priority support
+
+? Should the plan change start immediately? No
 
 🔍 Previewing subscription plan change...
 
@@ -116,8 +120,8 @@ $ npm run change-plan
 - `GET /api/v1/crm/accounts?PrimaryContact.Email={email}` - Search for accounts by email
 - `GET /api/v1/crm/accounts/{uid}?fields=Uid,Name,CurrentSubscription.*` - Fetch account with subscription details
 - `GET /api/v1/billing/plans` - Fetch available plans
-- `PUT /api/v1/billing/subscriptions/{subscription_uid}/changesubscriptionpreview` - Preview subscription plan change
-- `PUT /api/v1/billing/subscriptions/{subscription_uid}/changeSubscription` - Update subscription plan
+- `PUT /api/v1/billing/subscriptions/{subscription_uid}/changesubscriptionpreview?startImmediately={boolean}` - Preview subscription plan change
+- `PUT /api/v1/billing/subscriptions/{subscription_uid}/changeSubscription?startImmediately={boolean}` - Update subscription plan
 
 ## Core Code Examples
 
@@ -182,7 +186,7 @@ const previewPayload = {
 };
 
 const previewResponse = await fetch(
-  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changesubscriptionpreview`,
+  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changesubscriptionpreview?startImmediately=${startImmediately}`,
   {
     method: "PUT",
     headers: {
@@ -208,7 +212,7 @@ const subscriptionUpdatePayload = {
 };
 
 const subscriptionResponse = await fetch(
-  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscription`,
+  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscription?startImmediately=${startImmediately}`,
   {
     method: "PUT",
     headers: {
