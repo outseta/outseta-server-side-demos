@@ -10,6 +10,8 @@ Demonstrates how to change a user's subscription plan in Outseta using the API. 
 - Handles multiple accounts per email (prompts for selection)
 - Displays current subscription plan information
 - Fetches available plans and filters out the current plan
+- Previews the plan change with proration details and billing information
+- Asks for confirmation before proceeding
 - Updates the subscription with the selected new plan
 - Provides detailed logging and error handling
 
@@ -52,7 +54,20 @@ $ npm run change-plan
    Current plan: Basic Plan
 
 📦 Fetching available plans...
-? Select a new plan: Premium Plan (UID: DQ2oVq9V) - $29.99/month - Enhanced features and priority support
+? Select a new plan: Premium Plan (UID: DQ2oVq9V) - 29.99/month - Enhanced features and priority support
+
+🔍 Previewing subscription plan change...
+
+📋 Plan Change Preview:
+
+   Current Plan: Basic Plan
+   New Plan: Premium Plan
+   New Monthly Rate: 29.99
+   Proration Amount: 15.32
+   Next Bill Date: 7/7/2024
+   Effective Date: 6/7/2024
+
+? Do you want to proceed with this plan change? Yes
 
 🚀 Changing subscription plan...
 
@@ -85,7 +100,6 @@ $ npm run change-plan
    Account: Acme Inc
    Subscription UID: Qw8nZp2R
    New Plan: Premium Plan
-   Monthly Rate: $29.99
 ```
 
 ## API Endpoints Used
@@ -93,7 +107,8 @@ $ npm run change-plan
 - `GET /api/v1/crm/accounts?PrimaryContact.Email={email}` - Search for accounts by email
 - `GET /api/v1/crm/accounts/{uid}?fields=Uid,Name,CurrentSubscription.*` - Fetch account with subscription details
 - `GET /api/v1/billing/plans` - Fetch available plans
-- `PUT /api/v1/billing/subscriptions/{subscription_uid}` - Update subscription plan
+- `POST /api/v1/billing/subscriptions/{subscription_uid}/changeSubscriptionPreview` - Preview subscription plan change
+- `PUT /api/v1/billing/subscriptions/{subscription_uid}/changeSubscription` - Update subscription plan
 
 ## Core Code Examples
 
@@ -144,18 +159,47 @@ const accountResponse = await fetch(
 );
 ```
 
+### Previewing Plan Change
+
+```javascript
+const previewPayload = {
+  Plan: {
+    Uid: newPlanUid,
+  },
+  BillingRenewalTerm: currentSubscription.BillingRenewalTerm,
+  Account: {
+    Uid: accountUid,
+  },
+};
+
+const previewResponse = await fetch(
+  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscriptionPreview`,
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(previewPayload),
+  }
+);
+```
+
 ### Updating Subscription Plan
 
 ```javascript
 const subscriptionUpdatePayload = {
-  Uid: currentSubscription.Uid,
   Plan: {
     Uid: newPlanUid,
+  },
+  BillingRenewalTerm: currentSubscription.BillingRenewalTerm,
+  Account: {
+    Uid: accountUid,
   },
 };
 
 const subscriptionResponse = await fetch(
-  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}`,
+  `https://${process.env.OUTSETA_SUBDOMAIN}.outseta.com/api/v1/billing/subscriptions/${currentSubscription.Uid}/changeSubscription`,
   {
     method: "PUT",
     headers: {

@@ -1,6 +1,6 @@
 import "dotenv/config";
-import { input, select } from "@inquirer/prompts";
-import { changePlan } from "./change-plan.js";
+import { input, select, confirm } from "@inquirer/prompts";
+import { changePlan, previewPlanChange } from "./change-plan.js";
 
 /**
  * Fetches available plans from Outseta
@@ -140,7 +140,7 @@ async function promptForPlan(currentAccount) {
   }
 
   const planChoices = availablePlans.map((plan) => ({
-    name: `${plan.Name} (UID: ${plan.Uid}) - $${plan.MonthlyRate}/month${
+    name: `${plan.Name} (UID: ${plan.Uid}) - ${plan.MonthlyRate}/month${
       plan.Description ? ` - ${plan.Description.replace(/<[^>]+>/g, "")}` : ""
     }`,
     value: plan.Uid,
@@ -171,6 +171,67 @@ async function main() {
 
     const newPlan = await promptForPlan(account);
 
+    console.info("\n🔍 Previewing subscription plan change...\n");
+
+    const preview = await previewPlanChange(account.Uid, newPlan.Uid);
+
+    // Display preview information
+    console.info("📋 Plan Change Preview:");
+    console.info("");
+    console.info(
+      `   Current Plan: ${account.CurrentSubscription?.Plan?.Name || "Unknown"}`
+    );
+    console.info(`   New Plan: ${newPlan.Name}`);
+
+    // Show invoice preview details
+    if (preview.InvoiceDate) {
+      console.info(
+        `   Invoice Date: ${new Date(preview.InvoiceDate).toLocaleDateString()}`
+      );
+    }
+    console.info(`   Subtotal: $${preview.Subtotal}`);
+    console.info(`   Tax: $${preview.Tax}`);
+    console.info(`   Total: $${preview.Total}`);
+    console.info(`   Balance: $${preview.Balance}`);
+    console.info(`   Refunded: $${preview.Refunded}`);
+
+    // Show line items if available
+    if (preview.InvoiceDisplayItems && preview.InvoiceDisplayItems.length > 0) {
+      console.info("");
+      console.info("   📄 Invoice Line Items:");
+      preview.InvoiceDisplayItems.forEach((item, index) => {
+        console.info(
+          `   ${index + 1}. ${item.Description || item.ProductName}`
+        );
+        console.info(`      Type: ${item.Type}`);
+        console.info(`      Amount: ${item.Amount || 0}`);
+        if (item.StartDate && item.EndDate) {
+          console.info(
+            `      Period: ${new Date(
+              item.StartDate
+            ).toLocaleDateString()} - ${new Date(
+              item.EndDate
+            ).toLocaleDateString()}`
+          );
+        }
+        if (item.RenewalTerm) {
+          console.info(`      Renewal Term: ${item.RenewalTerm}`);
+        }
+      });
+    }
+    console.info("");
+
+    // Ask for confirmation
+    const confirmed = await confirm({
+      message: "Do you want to proceed with this plan change?",
+      default: false,
+    });
+
+    if (!confirmed) {
+      console.info("\n❌ Plan change cancelled.");
+      return;
+    }
+
     console.info("\n🚀 Changing subscription plan...\n");
 
     const result = await changePlan(account.Uid, newPlan.Uid);
@@ -180,7 +241,6 @@ async function main() {
     console.info(`   Account: ${account.Name}`);
     console.info(`   Subscription UID: ${result.Uid}`);
     console.info(`   New Plan: ${newPlan.Name}`);
-    console.info(`   Monthly Rate: $${newPlan.MonthlyRate}`);
     console.info("");
   } catch (error) {
     // Suppress stack trace if user exited with Ctrl+C
