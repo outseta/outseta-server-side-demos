@@ -75,39 +75,3 @@ export async function changePlan(accountUid, newPlanUid) {
 
   return subscriptionData;
 }
-
-/**
- * Searches for accounts by email address
- * @param {string} email - The email address to search for
- * @returns {Promise<Array>} - Array of matching accounts
- */
-export async function findAccountsByEmail(email) {
-  const response = await fetch(
-    `https://${
-      process.env.OUTSETA_SUBDOMAIN
-    }.outseta.com/api/v1/crm/accounts?fields=Uid,Name,PrimaryContact.Email,CurrentSubscription.Plan.Name&PrimaryContact.Email=${encodeURIComponent(
-      email
-    )}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(
-      `/api/v1/crm/accounts: [${response.status}] ${
-        data.ErrorMessage || data.Message || ""
-      }`
-    );
-  }
-
-  console.debug(
-    `✅ Found ${data.items?.length || 0} account(s) for email: ${email}`
-  );
-  return data.items || [];
-}

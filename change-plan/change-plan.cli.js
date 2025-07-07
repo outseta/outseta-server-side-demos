@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { input, select } from "@inquirer/prompts";
-import { changePlan, findAccountsByEmail } from "./change-plan.js";
+import { changePlan } from "./change-plan.js";
 
 /**
  * Fetches available plans from Outseta
@@ -23,6 +23,44 @@ async function getPlans() {
   }
 
   const data = await response.json();
+  return data.items || [];
+}
+
+/**
+ * Searches for accounts where the email address matches
+ * the primary person's email address, and returns the account
+ * with the most recent subscription
+ * @param {string} email - The email address to search for
+ * @returns {Promise<Array>} - Array of matching accounts
+ */
+async function findAccountsByEmail(email) {
+  const response = await fetch(
+    `https://${
+      process.env.OUTSETA_SUBDOMAIN
+    }.outseta.com/api/v1/crm/accounts?fields=Uid,Name,PrimaryContact.Email,CurrentSubscription.Plan.Name&PrimaryContact.Email=${encodeURIComponent(
+      email
+    )}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Outseta ${process.env.OUTSETA_API_KEY}:${process.env.OUTSETA_API_SECRET}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(
+      `/api/v1/crm/accounts: [${response.status}] ${
+        data.ErrorMessage || data.Message || ""
+      }`
+    );
+  }
+
+  console.debug(
+    `✅ Found ${data.items?.length || 0} account(s) for email: ${email}`
+  );
   return data.items || [];
 }
 
