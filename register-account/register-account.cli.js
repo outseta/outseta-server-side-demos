@@ -73,11 +73,11 @@ async function promptForAccountDetails() {
     message: "  Name:",
     default: "Acme Inc",
   });
-  const accountMaskot = await input({
-    message: "  Maskot:",
+  const accountMascot = await input({
+    message: "  Mascot:",
     default: "Roadrunner",
   });
-  return { accountName, accountMaskot };
+  return { accountName, accountMascot };
 }
 
 // CLI execution
@@ -88,7 +88,7 @@ async function main() {
     const accountDetails = await promptForAccountDetails();
 
     console.log("\n🚀 Registering user...\n");
-    const { PrimaryContact, Name, Maskot } = await registerUser({
+    const { PrimaryContact, Name, Mascot } = await registerUser({
       planUid: plan.Uid,
       ...accountDetails,
       ...personDetails,
@@ -103,7 +103,7 @@ async function main() {
     console.info(`   • Last Name: ${PrimaryContact?.LastName}`);
     console.info(`   • Coffee Preference: ${PrimaryContact?.CoffeePreference}`);
     console.info(`   • Company Name: ${Name}`);
-    console.info(`   • Company Maskot: ${Maskot}`);
+    console.info(`   • Company Maskot: ${Mascot}`);
     console.info("");
 
     console.info(
