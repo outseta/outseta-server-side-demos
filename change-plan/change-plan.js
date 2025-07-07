@@ -123,6 +123,7 @@ export async function previewPlanChange(accountUid, newPlanUid) {
     Plan: {
       Uid: newPlanUid,
     },
+    // Use the same billing renewal term as the current subscription
     BillingRenewalTerm: currentSubscription.BillingRenewalTerm,
     Account: {
       Uid: accountUid,
