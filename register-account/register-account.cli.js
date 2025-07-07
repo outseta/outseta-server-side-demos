@@ -103,7 +103,7 @@ async function main() {
     console.info(`   • Last Name: ${PrimaryContact?.LastName}`);
     console.info(`   • Coffee Preference: ${PrimaryContact?.CoffeePreference}`);
     console.info(`   • Company Name: ${Name}`);
-    console.info(`   • Company Maskot: ${Mascot}`);
+    console.info(`   • Company Mascot: ${Mascot}`);
     console.info("");
 
     console.info(
